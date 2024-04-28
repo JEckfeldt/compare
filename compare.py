@@ -20,6 +20,6 @@ userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__rv_125_0__Gecko_20100101_
 size = 18
 
 files = getFiles(dir, size, userAgent)
-print("Files with size not equal to", size, "bytes:")
-for file in files:
-    print(file)
+print("Files with size not equal to 18 and has useragent: ", len(files), "bytes:")
+# for file in files:
+#     print(file)
