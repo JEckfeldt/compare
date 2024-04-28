@@ -6,6 +6,7 @@ def getFiles(dir, excludeSize, userAgent):
     matchingFiles = []
     for root, dirs, files in os.walk(dir):
         for file in files:
+            print(file)
             filePath = os.path.join(root, file)
             # if file is valid, is not the normal size, and the userAgent is in filename
             if os.path.isfile(filePath) and os.path.getsize(filePath != excludeSize) and (userAgent in file):
