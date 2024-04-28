@@ -22,6 +22,6 @@ userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML
 size = 0
 
 files = getFiles(path, size, userAgent)
-print("Files with size not equal to 18 and has useragent: ")
-for file in files:
-    print(file)
+print("Files with size not equal to 18 and has useragent: ", len(files))
+# for file in files:
+#     print(file)
