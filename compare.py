@@ -14,7 +14,7 @@ def getFiles(dir, excludeSize, userAgent):
             if os.path.isfile(filePath) and os.path.getsize(filePath) != excludeSize and (userAgent in file):
                 if file not in matchingFiles:
                     matchingFiles.append(filePath)
-                    print(file)
+                    print(len(file))
                     i = i + 1
     
     return matchingFiles
