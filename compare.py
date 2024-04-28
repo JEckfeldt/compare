@@ -9,7 +9,8 @@ def getFiles(dir, excludeSize, userAgent):
             print(file)
             filePath = os.path.join(root, file)
             # if file is valid, is not the normal size, and the userAgent is in filename
-            if os.path.isfile(filePath) and os.path.getsize(filePath != excludeSize) and (userAgent in file):
+            # if os.path.isfile(filePath) and os.path.getsize(filePath != excludeSize) and (userAgent in file):
+            if os.path.getsize(filePath != excludeSize) and (userAgent in file):
                 matchingFiles.append(filePath)
     
     return matchingFiles
