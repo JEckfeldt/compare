@@ -2,9 +2,10 @@ import os
 
 # Return list of files not matching certain size
 # Also match the user agent
-i = 0
+
 def getFiles(dir, excludeSize, userAgent):
     matchingFiles = []
+    i = 0
     for root, dirs, files in os.walk(dir):
         for file in files:
             # print(file)
