@@ -75,7 +75,7 @@ def countUnstable(files):
             print("File not found")
             continue
         try:
-            with open(file_path, 'r') as file:
+            with open(file, 'r') as file:
                 data = json.load(file)
         except json.JSONDecodeError:
             print(f"Error decoding file ${file}")
