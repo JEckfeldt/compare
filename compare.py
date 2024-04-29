@@ -38,18 +38,23 @@ print('Base file: ', base)
 with open(base) as jsonFile:
     data = json.load(jsonFile)
 originalFonts = data['components']['fonts']['value']
+originalSet = set(originalFonts)
+
+results = {}
 
 for file in files:
     try:
         # Load file
-        print(file)
         with open(file) as json_file:
             data = json.load(json_file)
         # Check what we want exists
         if 'components' in data and 'fonts' in data['components'] and 'value' in data['components']['fonts']:
             # Get the new elements
-            new_fonts = [value['new'] for value in data['components']['fonts']['value'].values() if 'new' in value]
+            newFonts = [value['new'] for value in data['components']['fonts']['value'].values() if 'new' in value]
         else:
-            print("Required keys not found in the JSON file.")
+            print("Required keys not found in the JSON file.", file)
     except Exception as e:
         print(f"Error: {e}")
+    for font in newFonts:
+        if font not in originalSet:
+            results[font] = results[font] + 1
