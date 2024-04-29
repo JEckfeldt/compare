@@ -52,7 +52,7 @@ def getFonts(files):
             # Check what we want exists
             if 'components' in data and 'fonts' in data['components'] and 'value' in data['components']['fonts']:
                 # Get the new elements
-                newFonts = set([value['new'] for value in data['components']['fonts']['value'].values() if 'new' in value])
+                newFonts = set([value['new'] for value in data['components']['fonts']['value'] if 'new' in value])
                 notShared = newFonts ^ originalSet
                 for font in notShared:
                     if font in results:
