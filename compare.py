@@ -25,11 +25,44 @@ def getFiles(dir, excludeSize, userAgent):
         print(f"Error: {e}")
     return matchingFiles
 
-# get files that are different from the base
+# get all unstable visits from useragent
 files = getFiles(path, size, userAgent)
 print("Found ", len(files), " files\n")
 
-# Get the base file to make comparisons
-base = next((file for file in files if 'base' in file), None)
-files.remove(base)
-# print('Base file: ', base)
+print(getFirefoxFonts(files))
+
+# takes a list of filepaths gets the unstable fonts for firefox sheets
+def getFirefoxFonts(files):
+    results = {}
+    
+    # Get the base file to make comparisons
+    base = next((file for file in files if 'base' in file), None)
+    files.remove(base)
+
+    # load the base json data and get the original fonts
+    with open(base) as jsonFile:
+        data = json.load(jsonFile)
+    originalSet = set(data['components']['fonts']['value'])
+    
+    for file in files:
+        try:
+            # Load file
+            with open(file) as json_file:
+                data = json.load(json_file)
+            # Check what we want exists
+            if 'components' in data and 'fonts' in data['components'] and 'value' in data['components']['fonts']:
+                # Get the new elements
+                newFonts = set([value['new'] for value in data['components']['fonts']['value'].values() if 'new' in value])
+                notShared = newFonts ^ originalSet
+                for font in notShared:
+                    if font in results:
+                        results[font] += 1
+                    else:
+                        results[font] = 0
+            else:
+                print("Required keys not found in the JSON file.", file)
+        except Exception as e:
+            print(f"Error: {e}")
+        
+    return results
+
