@@ -26,7 +26,7 @@ userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__rv_125_0__Gecko_20100101_
 size = 18
 # get files with user agent that are different from the base
 files = getFiles(path, size, userAgent)
-print("Found " + len(files) + " files\n")
+print("Found ", len(files), " files\n")
 
 # Get the base file to make comparisons
 base = next((file for file in files if 'base' in file), None)
