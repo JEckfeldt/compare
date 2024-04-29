@@ -45,7 +45,7 @@ def getFonts(files):
     with open(base) as jsonFile:
         data = json.load(jsonFile)
     originalSet = set(data['components']['fonts']['value'])
-    
+    print(originalSet)
     for file in files:
         try:
             # Load file
@@ -56,8 +56,6 @@ def getFonts(files):
                 # Get the new elements
                 newFonts = set([value['new'] for value in data['components']['fonts']['value'].values() if 'new' in value])
                 notShared = newFonts ^ originalSet
-                if len(notShared) == 0:
-                    print("no fonts not shared")
                 for font in notShared:
                     if font in results:
                         results[font] += 1
@@ -68,6 +66,7 @@ def getFonts(files):
         except Exception as e:
             print(file)
             print(f"Error: {e}")
+    print(newFonts)
     return results
 
 # Return a count of how many attributes are appearing unstable
