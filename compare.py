@@ -43,7 +43,7 @@ def getFonts(files):
     base = next((file for file in files if 'base' in file), None)
     if base is not None:
         unstableFiles = [file for file in files if 'base' not in file]
-        print("Filtered out items new size: ", len(unstableFiles))
+        print("Unstable items: ", len(unstableFiles) + '\n')
         print("Base: ", base)
         
 
@@ -81,7 +81,7 @@ def countUnstable(files):
     base = next((file for file in files if 'base' in file), None)
     if base is not None:
         unstableFiles = [file for file in files if 'base' not in file]
-        print("Filtered out items new size: ", len(unstableFiles))
+        print("Unstable items: ", len(unstableFiles) + '\n')
         print("Base: ", base)
         
     
@@ -105,17 +105,31 @@ def countUnstable(files):
 
     return unstable
 
-# # Return the number of unique values per unstable attribute
-# def countUniqueUnstable(files):
-#     uniques = set()
-#     # remove the base from the list
-#     base = next((file for file in files if 'base' in file), None)
-#     if base is not None:
-#         files = [file for file in files if 'base' not in file]
-#         print("Filtered out items new size: ", len(files))
-#         print("Base: ", base)
-
-
+# Return the number of unique values per unstable attribute
+def countUniqueUnstable(files):
+    uniques = set()
+    # remove the base from the list
+    base = next((file for file in files if 'base' in file), None)
+    if base is not None:
+        unstableFiles = [file for file in files if 'base' not in file]
+        print("Unstable items: ", len(unstableFiles) + '\n')
+        print("Base: ", base)
+    # Iterate through the files
+    for file in unstableFiles:
+        if not os.path.exists(file):
+            print("File not found")
+            continue
+        try:
+            with open(file, 'r') as file:
+                data = json.load(file)
+        except json.JSONDecodeError:
+            print(f"Error decoding file ${file}")
+            continue
+        # Count when we see something new
+        if 'components' in data and 'canvas' in data['components'] and 'value' in data['components']['fonts'] 
+        and 'geometry' in data['components']['fonts']['value'] and 'new' in data['components']['fonts']['value']['geometry']:
+            uniques.add(data["components"]["canvas"]["value"]["geometry"]["new"])
+    return uniques
 
 
 # get all unstable visits from useragent
