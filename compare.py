@@ -107,6 +107,6 @@ def countUnstable(files):
 files = getFiles(path, size, userAgent)
 print("Found ", len(files), " files\n")
 
-print(getFonts(files))
+# print(getFonts(files))
 
 print(countUnstable(files))
