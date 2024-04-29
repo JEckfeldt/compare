@@ -52,12 +52,11 @@ try:
     if 'components' in data and 'fonts' in data['components'] and 'value' in data['components']['fonts']:
         # Get the new elements
         newFonts = [value['new'] for value in data['components']['fonts']['value'].values() if 'new' in value]
+        new = set(newFonts)
+        print(new)
     else:
         print("Required keys not found in the JSON file.", file)
 except Exception as e:
     print(f"Error: {e}")
-for font in newFonts:
-    if font not in originalSet:
-        results[font] = results[font] + 1
 
 print(results)
