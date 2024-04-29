@@ -42,19 +42,19 @@ originalSet = set(data['components']['fonts']['value'])
 
 results = {}
 
-for file in files:
-    try:
-        # Load file
-        with open(files[27]) as json_file:
-            data = json.load(json_file)
-        # Check what we want exists
-        if 'components' in data and 'fonts' in data['components'] and 'value' in data['components']['fonts']:
-            # Get the new elements
-            newFonts = set([value['new'] for value in data['components']['fonts']['value'].values() if 'new' in value])
-        else:
-            print("Required keys not found in the JSON file.", file)
-    except Exception as e:
-        print(f"Error: {e}")
+
+try:
+    # Load file
+    with open(files[27]) as json_file:
+        data = json.load(json_file)
+    # Check what we want exists
+    if 'components' in data and 'fonts' in data['components'] and 'value' in data['components']['fonts']:
+        # Get the new elements
+        newFonts = set([value['new'] for value in data['components']['fonts']['value'].values() if 'new' in value])
+    else:
+        print("Required keys not found in the JSON file.", file)
+except Exception as e:
+    print(f"Error: {e}")
     
 
-print(new ^ originalSet)
+print(newFonts ^ originalSet)
