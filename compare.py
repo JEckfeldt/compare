@@ -52,14 +52,13 @@ def getFonts(files):
             # Check what we want exists
             if 'components' in data and 'fonts' in data['components'] and 'value' in data['components']['fonts']:
                 # Get the new elements
-                if hasattr(data['components']['fonts']['value'], 'values') and callable(getattr(data['components']['fonts']['value'], 'values')):
-                    newFonts = set([value['new'] for value in data['components']['fonts']['value'].values() if 'new' in value])
-                    notShared = newFonts ^ originalSet
-                    for font in notShared:
-                        if font in results:
-                            results[font] += 1
-                        else:
-                            results[font] = 0
+                newFonts = set([value['new'] for value in data['components']['fonts']['value'].values() if 'new' in value])
+                notShared = newFonts ^ originalSet
+                for font in notShared:
+                    if font in results:
+                        results[font] += 1
+                    else:
+                        results[font] = 0
             else:
                 print("Required keys not found in the JSON file.", file)
         except Exception as e:
