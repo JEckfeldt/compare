@@ -36,6 +36,7 @@ def getFonts(files):
     # Get the base file to make comparisons
     base = next((file for file in files if 'base' in file), None)
     files = [file for file in files if 'base' not in file]
+    print("Filtered out items new size: ", len(files))
     print("Base: ", base)
 
     # load the base json data and get the original fonts
@@ -54,7 +55,7 @@ def getFonts(files):
                 try:
                     newFonts = set([value['new'] for value in data['components']['fonts']['value'].values() if 'new' in value])
                 except:
-                    continue
+                    newFonts = set()
                 notShared = newFonts ^ originalSet
                 for font in notShared:
                     if font in results:
