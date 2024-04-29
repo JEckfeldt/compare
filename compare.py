@@ -1,9 +1,13 @@
 import os
 import json
 
+# Change to find different files
+path = '/home/xu/f5/testsite/json'
+userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__rv_125_0__Gecko_20100101_Firefox_125_0_'
+size = 18
+
 # Return list of files not matching certain size
 # Also match the user agent
-
 def getFiles(dir, excludeSize, userAgent):
     matchingFiles = []
     i = 0
@@ -21,20 +25,29 @@ def getFiles(dir, excludeSize, userAgent):
         print(f"Error: {e}")
     return matchingFiles
 
-path = '/home/xu/f5/testsite/json'
-userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__rv_125_0__Gecko_20100101_Firefox_125_0_'
-size = 18
 # get files with user agent that are different from the base
 files = getFiles(path, size, userAgent)
 print("Found ", len(files), " files\n")
 
 # Get the base file to make comparisons
 base = next((file for file in files if 'base' in file), None)
+files.remove(base)
 print('Base file: ', base)
 
 # load the base json data and get the original fonts
 with open(base) as jsonFile:
     data = json.load(jsonFile)
-
 originalFonts = data['components']['fonts']['value']
-print(originalFonts) 
+
+for file in files:
+    try:
+    # Load file
+    with open(file) as json_file:
+        data = json.load(json_file)
+        
+    # Check what we want exists
+    if 'components' in data and 'fonts' in data['components'] and 'value' in data['components']['fonts']:
+        # Get the new elements
+        new_fonts = [value['new'] for value in data['components']['fonts']['value'].values() if 'new' in value]
+    else:
+        print("Required keys not found in the JSON file.")
