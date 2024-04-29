@@ -23,7 +23,5 @@ size = 18
 files = getFiles(path, size, userAgent)
 
 print("Files with size not equal to 18 and has useragent: ", len(files))
-result = [file for file in files if 'base' in file]
-print(result)
-# for file in files:
-#     print(file)
+base = next((file for file in files if 'base' in file), None)
+print('Base file: ', base)
