@@ -39,7 +39,7 @@ with open(base) as jsonFile:
     data = json.load(jsonFile)
 originalFonts = data['components']['fonts']['value']
 originalSet = set(originalFonts)
-print(originalSet)
+# print(originalSet)
 
 results = {}
 
@@ -53,7 +53,7 @@ try:
         # Get the new elements
         newFonts = [value['new'] for value in data['components']['fonts']['value'].values() if 'new' in value]
         new = set(newFonts)
-        print(new)
+        # print(new)
     else:
         print("Required keys not found in the JSON file.", file)
 except Exception as e:
