@@ -126,8 +126,7 @@ def countUniqueUnstable(files):
             print(f"Error decoding file ${file}")
             continue
         # Count when we see something new
-        if 'components' in data and 'canvas' in data['components'] and 'value' in data['components']['fonts'] 
-        and 'geometry' in data['components']['fonts']['value'] and 'new' in data['components']['fonts']['value']['geometry']:
+        if 'components' in data and 'canvas' in data['components'] and 'value' in data['components']['fonts'] and 'geometry' in data['components']['fonts']['value'] and 'new' in data['components']['fonts']['value']['geometry']:
             uniques.add(data["components"]["canvas"]["value"]["geometry"]["new"])
     return uniques
 
