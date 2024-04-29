@@ -128,7 +128,7 @@ def countUniqueUnstable(files):
         # Count when we see something new
         if 'components' in data and 'canvas' in data['components'] and 'value' in data['components']['canvas'] and 'geometry' in data['components']['canvas']['value'] and 'new' in data['components']['canvas']['value']['geometry']:
             uniques.add(data["components"]["canvas"]["value"]["geometry"]["new"])
-    return len(uniques)
+    return uniques
 
 
 # get all unstable visits from useragent
