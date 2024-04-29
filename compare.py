@@ -48,7 +48,6 @@ def getFonts(files):
         baseData = json.load(jsonFile)
     originalSet = set(baseData['components']['fonts']['value'])
 
-    print(originalSet)
     for file in files:
         try:
             # Load file
