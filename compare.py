@@ -30,7 +30,7 @@ def getFiles(dir, excludeSize, userAgent):
     return matchingFiles
 
 # takes a list of filepaths gets the unstable fonts for firefox sheets
-def getFirefoxFonts(files):
+def getFonts(files):
     results = {}
     
     # Get the base file to make comparisons
@@ -98,6 +98,6 @@ def countUnstable(files):
 files = getFiles(path, size, userAgent)
 print("Found ", len(files), " files\n")
 
-# print(getFirefoxFonts(files))
+print(getFonts(files))
 
 print(countUnstable(files))
