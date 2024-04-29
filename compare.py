@@ -58,3 +58,4 @@ for file in files:
     for font in newFonts:
         if font not in originalSet:
             results[font] = results[font] + 1
+print(results)
