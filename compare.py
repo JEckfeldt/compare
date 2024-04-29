@@ -1,8 +1,10 @@
 import os
 import json
 
-# Change to find different files
+# Dir Path to search
 path = '/home/xu/f5/testsite/json'
+size = 18 # file size to exclude
+
 # Windows
 # Firefox
 # userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__rv_125_0__Gecko_20100101_Firefox_125_0_'
@@ -13,15 +15,15 @@ path = '/home/xu/f5/testsite/json'
 
 # Macbook (Macintosh)
 # Safari
-userAgent = 'Mozilla_5_0__Macintosh__Intel_Mac_OS_X_10_15_7__AppleWebKit_605_1_15__KHTML__like_Gecko__Version_16_4_Safari_605_1_15_'
-
+# userAgent = 'Mozilla_5_0__Macintosh__Intel_Mac_OS_X_10_15_7__AppleWebKit_605_1_15__KHTML__like_Gecko__Version_16_4_Safari_605_1_15_'
+# Chrome
+userAgent = 'Mozilla_5_0__Macintosh__Intel_Mac_OS_X_10_15_7__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_124_0_0_0_Safari_537_36_'
 
 # iPhone
 # userAgent = 'Mozilla_5_0__iPhone__CPU_iPhone_OS_17_4_1_like_Mac_OS_X__AppleWebKit_605_1_15__KHTML__like_Gecko__Version_17_4_1_Mobile_15E148_Safari_604_1_'
 # userAgent = 'Mozilla_5_0__iPhone__CPU_iPhone_OS_17_4_like_Mac_OS_X__AppleWebKit_605_1_15__KHTML__like_Gecko__CriOS_124_0_6367_71_Mobile_15E148_Safari_604_1_'
 # Android
 # userAgent = 'Mozilla_5_0__Android_12__Mobile__rv_82_0__Gecko_82_0_Firefox_82_0_'
-size = 18
 
 # Return list of files not matching certain size
 # Also match the user agent
@@ -148,4 +150,4 @@ print("Found ", len(files), " files\n")
 
 print(countUnstable(files))
 
-print(countUniqueUnstable(files))
+# print(countUniqueUnstable(files))
