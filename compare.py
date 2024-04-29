@@ -34,7 +34,7 @@ print('Base file: ', base)
 
 # load the base json data and get the original fonts
 with open(base) as jsonFile:
-    data = json.load(jsonFile):
+    data = json.load(jsonFile)
 
 originalFonts = data['components']['fonts']['value']
 print(originalFonts) 
