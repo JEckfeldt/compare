@@ -25,12 +25,6 @@ def getFiles(dir, excludeSize, userAgent):
         print(f"Error: {e}")
     return matchingFiles
 
-# get all unstable visits from useragent
-files = getFiles(path, size, userAgent)
-print("Found ", len(files), " files\n")
-
-print(getFirefoxFonts(files))
-
 # takes a list of filepaths gets the unstable fonts for firefox sheets
 def getFirefoxFonts(files):
     results = {}
@@ -63,6 +57,10 @@ def getFirefoxFonts(files):
                 print("Required keys not found in the JSON file.", file)
         except Exception as e:
             print(f"Error: {e}")
-        
     return results
 
+# get all unstable visits from useragent
+files = getFiles(path, size, userAgent)
+print("Found ", len(files), " files\n")
+
+print(getFirefoxFonts(files))
