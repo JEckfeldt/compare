@@ -148,4 +148,4 @@ print("Found ", len(files), " files\n")
 
 print(countUnstable(files))
 
-# print(countUniqueUnstable(files))
+print(countUniqueUnstable(files))
