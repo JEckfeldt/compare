@@ -40,7 +40,7 @@ with open(base) as jsonFile:
 originalSet = set(data['components']['fonts']['value'])
 # print(originalSet)
 
-results = set()
+results = {}
 
 for file in files:
     try:
@@ -53,7 +53,10 @@ for file in files:
             newFonts = set([value['new'] for value in data['components']['fonts']['value'].values() if 'new' in value])
             notShared = newFonts ^ originalSet
             for font in notShared:
-                results.add(font)
+                if font in results:
+                    results[font] += 1
+                else:
+                    results[font] = 0
         else:
             print("Required keys not found in the JSON file.", file)
     except Exception as e:
