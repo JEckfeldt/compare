@@ -25,7 +25,7 @@ def getFiles(dir, excludeSize, userAgent):
         print(f"Error: {e}")
     return matchingFiles
 
-# get files with user agent that are different from the base
+# get files that are different from the base
 files = getFiles(path, size, userAgent)
 print("Found ", len(files), " files\n")
 
@@ -39,23 +39,25 @@ with open(base) as jsonFile:
     data = json.load(jsonFile)
 originalFonts = data['components']['fonts']['value']
 originalSet = set(originalFonts)
+print(originalSet)
 
 results = {}
 
-for file in files:
-    try:
-        # Load file
-        with open(file) as json_file:
-            data = json.load(json_file)
-        # Check what we want exists
-        if 'components' in data and 'fonts' in data['components'] and 'value' in data['components']['fonts']:
-            # Get the new elements
-            newFonts = [value['new'] for value in data['components']['fonts']['value'].values() if 'new' in value]
-        else:
-            print("Required keys not found in the JSON file.", file)
-    except Exception as e:
-        print(f"Error: {e}")
-    for font in newFonts:
-        if font not in originalSet:
-            results[font] = results[font] + 1
+
+try:
+    # Load file
+    with open(files[27]) as json_file:
+        data = json.load(json_file)
+    # Check what we want exists
+    if 'components' in data and 'fonts' in data['components'] and 'value' in data['components']['fonts']:
+        # Get the new elements
+        newFonts = [value['new'] for value in data['components']['fonts']['value'].values() if 'new' in value]
+    else:
+        print("Required keys not found in the JSON file.", file)
+except Exception as e:
+    print(f"Error: {e}")
+for font in newFonts:
+    if font not in originalSet:
+        results[font] = results[font] + 1
+
 print(results)
