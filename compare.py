@@ -69,8 +69,6 @@ def getFonts(files):
         except Exception as e:
             print(file)
             print(f"Error: {e}")
-    print(file)
-    print(newFonts)
     return results
 
 # Return a count of how many attributes are appearing unstable
