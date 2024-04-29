@@ -31,7 +31,9 @@ def getFirefoxFonts(files):
     
     # Get the base file to make comparisons
     base = next((file for file in files if 'base' in file), None)
-    files.remove(base)
+    if base is not None:
+        files.remove(base)
+        
 
     # load the base json data and get the original fonts
     with open(base) as jsonFile:
@@ -64,7 +66,9 @@ def countUnstable(files):
     unstable = {} # result
     # remove the base from the list
     base = next((file for file in files if 'base' in file), None)
-    files.remove(base)
+    if base is not None:
+        files.remove(base)
+        
     
     for file in files:
         if not os.path.exists(file):
