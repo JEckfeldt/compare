@@ -5,9 +5,9 @@ import json
 path = '/home/xu/f5/testsite/json'
 # Windows
 # Firefox
-userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__rv_125_0__Gecko_20100101_Firefox_125_0_'
+# userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__rv_125_0__Gecko_20100101_Firefox_125_0_'
 #Edge
-# userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_124_0_0_0_Safari_537_36_Edg_124_0_0_0_'
+userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_124_0_0_0_Safari_537_36_Edg_124_0_0_0_'
 
 # iPhone
 # userAgent = 'Mozilla_5_0__iPhone__CPU_iPhone_OS_17_4_1_like_Mac_OS_X__AppleWebKit_605_1_15__KHTML__like_Gecko__Version_17_4_1_Mobile_15E148_Safari_604_1_'
@@ -43,7 +43,7 @@ def getFonts(files):
     base = next((file for file in files if 'base' in file), None)
     if base is not None:
         unstableFiles = [file for file in files if 'base' not in file]
-        print("Unstable items: ", len(unstableFiles) + '\n')
+        print("Unstable items: ", len(unstableFiles), '\n')
         print("Base: ", base)
         
 
@@ -81,7 +81,7 @@ def countUnstable(files):
     base = next((file for file in files if 'base' in file), None)
     if base is not None:
         unstableFiles = [file for file in files if 'base' not in file]
-        print("Unstable items: ", len(unstableFiles) + '\n')
+        print("Unstable items: ", len(unstableFiles), '\n')
         print("Base: ", base)
         
     
@@ -112,7 +112,7 @@ def countUniqueUnstable(files):
     base = next((file for file in files if 'base' in file), None)
     if base is not None:
         unstableFiles = [file for file in files if 'base' not in file]
-        print("Unstable items: ", len(unstableFiles) + '\n')
+        print("Unstable items: ", len(unstableFiles), '\n')
         print("Base: ", base)
     # Iterate through the files
     for file in unstableFiles:
@@ -128,13 +128,15 @@ def countUniqueUnstable(files):
         # Count when we see something new
         if 'components' in data and 'canvas' in data['components'] and 'value' in data['components']['fonts'] and 'geometry' in data['components']['fonts']['value'] and 'new' in data['components']['fonts']['value']['geometry']:
             uniques.add(data["components"]["canvas"]["value"]["geometry"]["new"])
-    return uniques
+    return len(uniques)
 
 
 # get all unstable visits from useragent
 files = getFiles(path, size, userAgent)
 print("Found ", len(files), " files\n")
 
-print(getFonts(files))
+# print(getFonts(files))
 
 print(countUnstable(files))
+
+print(countUniqueUnstable(files))
