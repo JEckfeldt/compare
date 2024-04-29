@@ -17,11 +17,13 @@ def getFiles(dir, excludeSize, userAgent):
     return matchingFiles
 
 path = '/home/xu/f5/testsite/json'
-# userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__rv_125_0__Gecko_20100101_Firefox_125_0_'
-userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_124_0_0_0_Safari_537_36'
-size = 0
-
+userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__rv_125_0__Gecko_20100101_Firefox_125_0_'
+size = 18
+# get files with user agent that are different from the base
 files = getFiles(path, size, userAgent)
+
 print("Files with size not equal to 18 and has useragent: ", len(files))
+if any("base" in files for file in files):
+    print("Base file: ", file)
 # for file in files:
 #     print(file)
