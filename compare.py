@@ -80,7 +80,10 @@ def countUnstable(files):
     # remove the base from the list
     base = next((file for file in files if 'base' in file), None)
     if base is not None:
-        files.remove(base)
+        files = [file for file in files if 'base' not in file]
+        print("Filtered out items new size: ", len(files))
+        
+    print("Base: ", base)
         
     
     for file in files:
@@ -102,6 +105,9 @@ def countUnstable(files):
                 unstable[value] = 1
 
     return unstable
+
+# def countUniqueUnstable(files):
+
 
 # get all unstable visits from useragent
 files = getFiles(path, size, userAgent)
