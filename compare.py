@@ -7,7 +7,9 @@ path = '/home/xu/f5/testsite/json'
 # userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__rv_125_0__Gecko_20100101_Firefox_125_0_'
 # iPhone
 # userAgent = 'Mozilla_5_0__iPhone__CPU_iPhone_OS_17_4_1_like_Mac_OS_X__AppleWebKit_605_1_15__KHTML__like_Gecko__Version_17_4_1_Mobile_15E148_Safari_604_1_'
-userAgent = 'Mozilla_5_0__iPhone__CPU_iPhone_OS_17_4_like_Mac_OS_X__AppleWebKit_605_1_15__KHTML__like_Gecko__CriOS_124_0_6367_71_Mobile_15E148_Safari_604_1_'
+# userAgent = 'Mozilla_5_0__iPhone__CPU_iPhone_OS_17_4_like_Mac_OS_X__AppleWebKit_605_1_15__KHTML__like_Gecko__CriOS_124_0_6367_71_Mobile_15E148_Safari_604_1_'
+# Android
+userAgent = 'Mozilla_5_0__Android_12__Mobile__rv_82_0__Gecko_82_0_Firefox_82_0_'
 size = 18
 
 # Return list of files not matching certain size
@@ -43,8 +45,9 @@ def getFonts(files):
 
     # load the base json data and get the original fonts
     with open(base) as jsonFile:
-        data = json.load(jsonFile)
-    originalSet = set(data['components']['fonts']['value'])
+        baseData = json.load(jsonFile)
+    originalSet = set(baseData['components']['fonts']['value'])
+
     print(originalSet)
     for file in files:
         try:
@@ -103,6 +106,6 @@ def countUnstable(files):
 files = getFiles(path, size, userAgent)
 print("Found ", len(files), " files\n")
 
-print(getFonts(files))
+# print(getFonts(files))
 
 print(countUnstable(files))
