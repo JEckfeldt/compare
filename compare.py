@@ -37,7 +37,7 @@ def getFonts(files):
     base = next((file for file in files if 'base' in file), None)
     if base is not None:
         files.remove(base)
-        
+    print("Base: ", base)
 
     # load the base json data and get the original fonts
     with open(base) as jsonFile:
