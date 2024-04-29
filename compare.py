@@ -35,8 +35,10 @@ def getFonts(files):
     
     # Get the base file to make comparisons
     base = next((file for file in files if 'base' in file), None)
-    files = [file for file in files if 'base' not in file]
-    print("Filtered out items new size: ", len(files))
+    if base is not None:
+        files = [file for file in files if 'base' not in file]
+        print("Filtered out items new size: ", len(files))
+        
     print("Base: ", base)
 
     # load the base json data and get the original fonts
