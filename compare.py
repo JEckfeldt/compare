@@ -59,8 +59,37 @@ def getFirefoxFonts(files):
             print(f"Error: {e}")
     return results
 
+# Return a count of how many attributes are appearing unstable
+def countUnstable(files):
+    unstable = {} # result
+    # remove the base from the list
+    base = next((file for file in files if 'base' in file), None)
+    files.remove(base)
+    
+    for file in files:
+        if not os.path.exists(file):
+            print("File not found")
+            continue
+        try:
+            with open(file_path, 'r') as file:
+                data = json.load(file)
+        except json.JSONDecodeError:
+            print(f"Error decoding file ${file}")
+            continue
+        # Count when we see something new 
+        components = data.get("components", {})
+        for value in components.keys():
+            if value in unstable:
+                unstable[value] += 1
+            else:
+                unstable[value] = 1
+
+    return unstable
+
 # get all unstable visits from useragent
 files = getFiles(path, size, userAgent)
 print("Found ", len(files), " files\n")
 
 print(getFirefoxFonts(files))
+
+print(countUnstable(files))
