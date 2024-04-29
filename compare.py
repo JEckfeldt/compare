@@ -61,7 +61,7 @@ def getFonts(files):
                     if font in results:
                         results[font] += 1
                     else:
-                        results[font] = 0
+                        results[font] = 1
             else:
                 print("Required keys not found in the JSON file.", file)
         except Exception as e:
