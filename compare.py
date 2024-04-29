@@ -95,6 +95,7 @@ def countUnstable(files):
             if value in unstable:
                 unstable[value] += 1
             else:
+                print(file)
                 unstable[value] = 1
 
     return unstable
