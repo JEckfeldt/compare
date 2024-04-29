@@ -33,34 +33,3 @@ print("Found ", len(files), " files\n")
 base = next((file for file in files if 'base' in file), None)
 files.remove(base)
 # print('Base file: ', base)
-
-# load the base json data and get the original fonts
-with open(base) as jsonFile:
-    data = json.load(jsonFile)
-originalSet = set(data['components']['fonts']['value'])
-# print(originalSet)
-
-results = {}
-
-for file in files:
-    try:
-        # Load file
-        with open(file) as json_file:
-            data = json.load(json_file)
-        # Check what we want exists
-        if 'components' in data and 'fonts' in data['components'] and 'value' in data['components']['fonts']:
-            # Get the new elements
-            newFonts = set([value['new'] for value in data['components']['fonts']['value'].values() if 'new' in value])
-            notShared = newFonts ^ originalSet
-            for font in notShared:
-                if font in results:
-                    results[font] += 1
-                else:
-                    results[font] = 0
-        else:
-            print("Required keys not found in the JSON file.", file)
-    except Exception as e:
-        print(f"Error: {e}")
-    
-
-print(results)
