@@ -134,20 +134,22 @@ def countUniqueUnstable(files):
         except json.JSONDecodeError:
             print(f"Error decoding file ${file}")
             continue
-        for component, details in data['components'].items():
-            if isinstance(details, dict):
-                for key, value in details.items():
-                    if isinstance(value, dict) and "new" in value:
-                        uniques.add(value['new'])
-                    elif isinstance(value, list):
-                        for item in value:
-                            if isinstance(value, dict) and "new" in item:
-                                uniques.add(item['new'])
-        # Count when we see something new
+        # for component, details in data['components'].items():
+        #     if isinstance(details, dict):
+        #         for key, value in details.items():
+        #             if isinstance(value, dict) and "new" in value:
+        #                 uniques.add(value['new'])
+        #             elif isinstance(value, list):
+        #                 for item in value:
+        #                     if isinstance(value, dict) and "new" in item:
+        #                         uniques.add(item['new'])
+        # # Count when we see something new
         # if 'components' in data and 'canvas' in data['components'] and 'value' in data['components']['canvas'] and 'geometry' in data['components']['canvas']['value'] and 'new' in data['components']['canvas']['value']['geometry']:
         #     uniques.add(data["components"]["canvas"]["value"]["geometry"]["new"])
         # if 'components' in data and 'canvas' in data['components'] and 'value' in data['components']['canvas'] and 'text' in data['components']['canvas']['value'] and 'new' in data['components']['canvas']['value']['text']:
         #     uniques.add(data["components"]["canvas"]["value"]["text"]["new"])
+        if 'components' in data and 'audio' in data['components'] and 'value' in data['components']['audio'] and 'new' in data['components']['audio']['value']:
+            uniques.add(data['components']['audio']['value']['new'])
     return uniques
 
 
