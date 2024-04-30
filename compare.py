@@ -154,7 +154,7 @@ def countUniqueUnstable(files):
             print(f"Error decoding file ${file}")
             continue
         if 'components' in data and 'canvas' in data['components'] and 'value' in data['components']['canvas'] and 'text' in data['components']['canvas']['value']:
-            uniques.add(data['components']['canvas']['value']['new'])
+            uniques.add(data['components']['canvas']['value']['text']['new'])
                 
     return uniques
 
