@@ -135,14 +135,7 @@ def countUniqueUnstable(files):
             print(f"Error decoding file ${file}")
             continue
         for component, details in data['components'].items():
-            if isinstance(details, dict):
-                for key, value in details.items():
-                    if isinstance(value, dict) and "new" in value:
-                        uniques.add(value['new'])
-                    elif isinstance(value, list):
-                        for item in value:
-                            if isinstance(value, dict) and "new" in item:
-                                uniques.add(item['new'])
+            uniques.add(component)
                 
     return uniques
 
