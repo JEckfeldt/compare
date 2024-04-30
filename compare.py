@@ -26,13 +26,17 @@ size = 18 # file size to exclude
 # userAgent = 'Mozilla_5_0__iPhone__CPU_iPhone_OS_17_4_like_Mac_OS_X__AppleWebKit_605_1_15__KHTML__like_Gecko__CriOS_124_0_6367_71_Mobile_15E148_Safari_604_1_'
 # userAgent = 'Mozilla_5_0__iPhone__CPU_iPhone_OS_17_4_like_Mac_OS_X__AppleWebKit_605_1_15__KHTML__like_Gecko__CriOS_124_0_6367_88_Mobile_15E148_Safari_604_1_'
 # Firefox
-userAgent = 'Mozilla_5_0__iPhone__CPU_iPhone_OS_17_4_1_like_Mac_OS_X__AppleWebKit_605_1_15__KHTML__like_Gecko__FxiOS_125_2__Mobile_15E148_Safari_605_1_15_'
+# userAgent = 'Mozilla_5_0__iPhone__CPU_iPhone_OS_17_4_1_like_Mac_OS_X__AppleWebKit_605_1_15__KHTML__like_Gecko__FxiOS_125_2__Mobile_15E148_Safari_605_1_15_'
 
 # Android
 # Firefox
-userAgent = 'Mozilla_5_0__Android_12__Mobile__rv_82_0__Gecko_82_0_Firefox_82_0_'
+# userAgent = 'Mozilla_5_0__Android_12__Mobile__rv_82_0__Gecko_82_0_Firefox_82_0_'
 # Chrome
 # userAgent = 'Mozilla_5_0__Linux__Android_12__Pixel_3a__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_95_0_4638_74_Mobile_Safari_537_36_'
+
+# Linux
+# Chrome
+userAgent = 'Mozilla_5_0__X11__Linux_x86_64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_124_0_0_0_Safari_537_36_'
 
 # Return list of files not matching certain size
 # Also match the user agent
@@ -158,4 +162,4 @@ print("Found ", len(files), " files\n")
 
 print(countUnstable(files))
 
-print(countUniqueUnstable(files))
+# print(countUniqueUnstable(files))
