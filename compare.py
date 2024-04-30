@@ -29,7 +29,10 @@ size = 18 # file size to exclude
 userAgent = 'Mozilla_5_0__iPhone__CPU_iPhone_OS_17_4_1_like_Mac_OS_X__AppleWebKit_605_1_15__KHTML__like_Gecko__FxiOS_125_2__Mobile_15E148_Safari_605_1_15_'
 
 # Android
+# Firefox
 # userAgent = 'Mozilla_5_0__Android_12__Mobile__rv_82_0__Gecko_82_0_Firefox_82_0_'
+# Chrome
+userAgent = 'Mozilla_5_0__Linux__Android_12__Pixel_3a__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_95_0_4638_74_Mobile_Safari_537_36_'
 
 # Return list of files not matching certain size
 # Also match the user agent
