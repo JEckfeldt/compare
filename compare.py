@@ -17,11 +17,14 @@ size = 18 # file size to exclude
 # Safari
 # userAgent = 'Mozilla_5_0__Macintosh__Intel_Mac_OS_X_10_15_7__AppleWebKit_605_1_15__KHTML__like_Gecko__Version_16_4_Safari_605_1_15_'
 # Chrome
-userAgent = 'Mozilla_5_0__Macintosh__Intel_Mac_OS_X_10_15_7__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_124_0_0_0_Safari_537_36_'
+# userAgent = 'Mozilla_5_0__Macintosh__Intel_Mac_OS_X_10_15_7__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_124_0_0_0_Safari_537_36_'
 
 # iPhone
-# userAgent = 'Mozilla_5_0__iPhone__CPU_iPhone_OS_17_4_1_like_Mac_OS_X__AppleWebKit_605_1_15__KHTML__like_Gecko__Version_17_4_1_Mobile_15E148_Safari_604_1_'
+# Safari
+userAgent = 'Mozilla_5_0__iPhone__CPU_iPhone_OS_17_4_1_like_Mac_OS_X__AppleWebKit_605_1_15__KHTML__like_Gecko__Version_17_4_1_Mobile_15E148_Safari_604_1_'
+# Chrome
 # userAgent = 'Mozilla_5_0__iPhone__CPU_iPhone_OS_17_4_like_Mac_OS_X__AppleWebKit_605_1_15__KHTML__like_Gecko__CriOS_124_0_6367_71_Mobile_15E148_Safari_604_1_'
+
 # Android
 # userAgent = 'Mozilla_5_0__Android_12__Mobile__rv_82_0__Gecko_82_0_Firefox_82_0_'
 
@@ -135,7 +138,7 @@ def countUniqueUnstable(files):
             print(f"Error decoding file ${file}")
             continue
         for component, details in data['components'].items():
-            uniques.add(component, details)
+            uniques.add(component)
                 
     return uniques
 
@@ -146,6 +149,6 @@ print("Found ", len(files), " files\n")
 
 # print(getFonts(files))
 
-# print(countUnstable(files))
+print(countUnstable(files))
 
-print(countUniqueUnstable(files))
+# print(countUniqueUnstable(files))
