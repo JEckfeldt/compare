@@ -148,8 +148,8 @@ def countUniqueUnstable(files):
         #     uniques.add(data["components"]["canvas"]["value"]["geometry"]["new"])
         # if 'components' in data and 'canvas' in data['components'] and 'value' in data['components']['canvas'] and 'text' in data['components']['canvas']['value'] and 'new' in data['components']['canvas']['value']['text']:
         #     uniques.add(data["components"]["canvas"]["value"]["text"]["new"])
-        if 'components' in data and 'audio' in data['components'] and 'value' in data['components']['audio'] and 'new' in data['components']['audio']['value']:
-            uniques.add(data['components']['audio']['value']['new'])
+        if 'components' in data and 'screenFrame' in data['components'] and 'value' in data['components']['screenFrame'] and 'new' in data['components']['screenFrame']['value']:
+            uniques.add(data['components']['screenFrame']['value']['new'])
     return uniques
 
 
