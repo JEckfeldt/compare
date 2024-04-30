@@ -153,8 +153,8 @@ def countUniqueUnstable(files):
         except json.JSONDecodeError:
             print(f"Error decoding file ${file}")
             continue
-        if 'components' in data and 'audio' in data['components'] and 'value' in data['components']['audio'] and 'new' in data['components']['audio']['value']:
-            uniques.add(data['components']['audio']['value']['new'])
+        if 'components' in data and 'canvas' in data['components'] and 'value' in data['components']['canvas'] and 'text' in data['components']['canvas']['value']:
+            uniques.add(data['components']['canvas']['value']['new'])
                 
     return uniques
 
@@ -169,4 +169,4 @@ print("Found ", len(files), " files\n")
 
 print(countUnstable(files))
 
-# print(countUniqueUnstable(files))
+print(countUniqueUnstable(files))
