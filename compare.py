@@ -163,7 +163,9 @@ def countUniqueUnstable(files):
 files = getFiles(path, size, userAgent)
 print("Found ", len(files), " files\n")
 
-print(getFonts(files))
+f = getFonts(files)
+print(f)
+print(len(f))
 
 print(countUnstable(files))
 
