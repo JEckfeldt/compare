@@ -58,7 +58,7 @@ def getFiles(dir, excludeSize, userAgent):
                     if os.path.getsize(filePath) != excludeSize and (userAgent in file):
                         if file not in matchingFiles:
                             matchingFiles.append(filePath)
-                    else if os.path.getsize(filePath) == excludeSize and (userAgent in file):
+                    elif os.path.getsize(filePath) == excludeSize and (userAgent in file):
                         print(file)
     except Exception as e:
         print(f"Error: {e}")
