@@ -58,8 +58,8 @@ def getFiles(dir, excludeSize, userAgent):
                     if os.path.getsize(filePath) != excludeSize and (userAgent in file):
                         if file not in matchingFiles:
                             matchingFiles.append(filePath)
-                    elif os.path.getsize(filePath) == excludeSize and (userAgent in file):
-                        print(file)
+                    # elif os.path.getsize(filePath) == excludeSize and (userAgent in file):
+                    #     print(file)
     except Exception as e:
         print(f"Error: {e}")
     return matchingFiles
@@ -155,8 +155,8 @@ def countUniqueUnstable(files):
         except json.JSONDecodeError:
             print(f"Error decoding file ${file}")
             continue
-        if 'components' in data and 'architecture' in data['components'] and 'value' in data['components']['architecture'] and 'new' in data['components']['architecture']['value']:
-            uniques.add(data['components']['architecture']['value']['new'])
+        if 'components' in data and 'canvas' in data['components'] and 'value' in data['components']['canvas'] and 'geometry' in data['components']['canvas']['value']:
+            uniques.add(data['components']['canvas']['value']['geometry']['new'])
                 
     return uniques
 
@@ -171,4 +171,4 @@ print("Found ", len(files), " files\n")
 
 # print(countUnstable(files))
 
-# print(countUniqueUnstable(files))
+print(countUniqueUnstable(files))
