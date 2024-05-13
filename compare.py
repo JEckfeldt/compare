@@ -82,7 +82,7 @@ def getUnstableFiles(dir, excludeSize, userAgent):
                 filePath = os.path.join(root, file)
                 # if file is valid, is not the normal size, and the userAgent is in filename
                 if os.path.isfile(filePath):
-                    if os.path.getsize(filePath) != excludeSize and (userAgent in file):
+                    if os.path.getsize(filePath) != excludeSize and (userAgent in file) and 'base' not in file:
                         if file not in matchingFiles:
                             matchingFiles.append(filePath)
 
