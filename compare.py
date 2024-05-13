@@ -54,8 +54,9 @@ def extractDateTime(file_name):
     else:
         return datetime.min  # Default value if date is not found
 
+# get the first 10000 files from a list
 def getAllFiles(dir, userAgent):
-    userFiles = []
+    files = []
     try:
         # Get all files with useragent
         for root, dirs, files, in os.walk(dir):
@@ -66,7 +67,13 @@ def getAllFiles(dir, userAgent):
                         userFiles.append(filePath)
     except Exception as e:
         print(f"Error: {e}")
-    return userFiles
+    
+    # Remove the base
+    base = next((file for file in files if 'base' in file), None)
+    if base is not None:
+        unstableFiles = [file for file in files if 'base' not in file]
+
+    return unstableFiles
 
 
 # Return list of files not matching certain size
@@ -90,17 +97,10 @@ def getFiles(dir, excludeSize, userAgent):
         print(f"Error: {e}")
     return matchingFiles
 
-# Get the 1st 10000 files of a user agent, and count how many times the file size changes
+# count how many times the file size changed
 def getChangedFiles(files):
     numChanges = 0
     prevFileSize = None
-
-    # Remove the base
-    base = next((file for file in files if 'base' in file), None)
-    if base is not None:
-        unstableFiles = [file for file in files if 'base' not in file]
-        # print("Unstable items: ", len(unstableFiles), '\n')
-        # print("Base: ", base)
     
     for file in unstableFiles:
         if prevFileSize is not None and os.path.getsize(file) != prevFileSize:
@@ -109,9 +109,6 @@ def getChangedFiles(files):
         prevFileSize = os.path.getsize(file)
 
     return numChanges
-
-
-
 
 # takes a list of filepaths gets the unstable fonts for firefox sheets
 def getFonts(files):
