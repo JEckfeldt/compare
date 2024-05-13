@@ -54,6 +54,21 @@ def extractDateTime(file_name):
     else:
         return datetime.min  # Default value if date is not found
 
+def getAllFiles(dir, userAgent):
+    files = []
+    try:
+        # Get all files with useragent
+        for root, dirs, files, in os.walk(dir):
+            for file in files:
+                filePath = os.path.join(root, file)
+                if os.path.isfile(filePath):
+                    if userAgent in file:
+                        files.append(filePath)
+    except Exception as e:
+        print(f"Error: {e}")
+    return files
+
+
 # Return list of files not matching certain size
 # Also match the user agent
 def getFiles(dir, excludeSize, userAgent):
@@ -76,21 +91,8 @@ def getFiles(dir, excludeSize, userAgent):
     return matchingFiles
 
 # Get the 1st 10000 files of a user agent, and count how many times the file size changes
-def getChangedFiles(dir, userAgent):
+def getChangedFiles(files):
     numChanges = 0
-    files = []
-
-    try:
-        # Get all files with useragent
-        for root, dirs, files, in os.walk(dir):
-            for file in files:
-                filePath = os.path.join(root, file)
-                if os.path.isfile(filePath):
-                    if userAgent in file:
-                        files.append(filePath)
-    except Exception as e:
-        print(f"Error: {e}")
-
     # sort the list by date
     sortedFiles = sorted(files, key=extractDateTime)
 
@@ -199,17 +201,11 @@ def countUniqueUnstable(files):
     return uniques
 
 
-# get all unstable visits from useragent
-files = getFiles(path, size, userAgent)
-print("Found ", len(files), " files\n")
+# # get all unstable visits from useragent
+# files = getFiles(path, size, userAgent)
+# print("Found ", len(files), " files\n")
 
+# get all files from UA
+files = getAllFiles(path, userAgent)
 
-changes = getChangedFiles(path, userAgent)
-
-# f = getFonts(files)
-# print(f)
-# print(len(f))
-
-# print(countUnstable(files))
-
-# print(countUniqueUnstable(files))
+changes = getChangedFiles(files)
