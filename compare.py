@@ -71,9 +71,7 @@ def getAllFiles(dir, userAgent):
         print(f"Error: {e}")
     return matching
 
-
 # Return list of files not matching certain size
-# Also match the user agent
 def getFiles(dir, excludeSize, userAgent):
     matchingFiles = []
     i = 0
@@ -106,7 +104,7 @@ def getChangedFiles(files):
 
     return numChanges
 
-# takes a list of filepaths gets the unstable fonts for firefox sheets
+# gets the unstable fonts for firefox sheets
 def getFonts(files):
     results = {}
     
@@ -209,12 +207,7 @@ def countUniqueUnstable(files):
 
 # get all files from UA
 files = getAllFiles(path, userAgent)
-print(len(files))
 
 sorted_file_names = sorted(files, key=extractDateTime)
-
-# Print the sorted list
-# for file_name in sorted_file_names:
-#     print(file_name)
 
 print(getChangedFiles(sorted_file_names))
