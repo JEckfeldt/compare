@@ -63,17 +63,11 @@ def getAllFiles(dir, userAgent):
             for file in files:
                 filePath = os.path.join(root, file)
                 if os.path.isfile(filePath):
-                    if userAgent in file:
+                    if userAgent in file and 'base' not in filePath:
                         matching.append(filePath)
     except Exception as e:
         print(f"Error: {e}")
-    
-    # Remove the base
-    base = next((file for file in matching if 'base' in file), None)
-    if base is not None:
-        unstableFiles = [file for file in matching if 'base' not in file]
-
-    return unstableFiles
+    return matching
 
 
 # Return list of files not matching certain size
