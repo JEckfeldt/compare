@@ -94,12 +94,14 @@ def getFiles(dir, excludeSize, userAgent):
 def getChangedFiles(files):
     numChanges = 0
     prevFileSize = 0
+
     # Remove the base
     base = next((file for file in files if 'base' in file), None)
     if base is not None:
         unstableFiles = [file for file in files if 'base' not in file]
-        print("Unstable items: ", len(unstableFiles), '\n')
-        print("Base: ", base)
+        # print("Unstable items: ", len(unstableFiles), '\n')
+        # print("Base: ", base)
+    
     for file in unstableFiles:
         if prevFileSize is not None and os.path.getsize(file) != prevFileSize:
             print(file)
@@ -157,8 +159,8 @@ def countUnstable(files):
     base = next((file for file in files if 'base' in file), None)
     if base is not None:
         unstableFiles = [file for file in files if 'base' not in file]
-        print("Unstable items: ", len(unstableFiles), '\n')
-        print("Base: ", base)
+        # print("Unstable items: ", len(unstableFiles), '\n')
+        # print("Base: ", base)
         
     
     for file in unstableFiles:
