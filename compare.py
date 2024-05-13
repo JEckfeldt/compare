@@ -56,7 +56,7 @@ def extractDateTime(file_name):
 
 # get the first 10000 files from a list
 def getAllFiles(dir, userAgent):
-    files = []
+    matching = []
     try:
         # Get all files with useragent
         for root, dirs, files, in os.walk(dir):
@@ -64,14 +64,14 @@ def getAllFiles(dir, userAgent):
                 filePath = os.path.join(root, file)
                 if os.path.isfile(filePath):
                     if userAgent in file:
-                        files.append(filePath)
+                        matching.append(filePath)
     except Exception as e:
         print(f"Error: {e}")
     
     # Remove the base
-    base = next((file for file in files if 'base' in file), None)
+    base = next((file for file in matching if 'base' in file), None)
     if base is not None:
-        unstableFiles = [file for file in files if 'base' not in file]
+        unstableFiles = [file for file in matching if 'base' not in file]
 
     return unstableFiles
 
