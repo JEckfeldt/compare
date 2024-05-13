@@ -205,9 +205,12 @@ def countUniqueUnstable(files):
 # files = getFiles(path, size, userAgent)
 # print("Found ", len(files), " files\n")
 
-# get all files from UA
-files = getAllFiles(path, userAgent)
+# gets number of changes for userAgent
+def findNumChanges():
+    files = getAllFiles(path, userAgent)
+    sorted_file_names = sorted(files, key=extractDateTime)
+    print("Files sorted: ", len(sorted_file_names))
+    print("Number of changes: ", getChangedFiles(sorted_file_names))
 
-sorted_file_names = sorted(files, key=extractDateTime)
 
-print(getChangedFiles(sorted_file_names))
+findNumChanges()
