@@ -94,7 +94,7 @@ def getFiles(dir, excludeSize, userAgent):
 def getChangedFiles(files):
     numChanges = 0
 
-    for file in sortedFiles:
+    for file in files:
         print(file)
 
     return numChanges
