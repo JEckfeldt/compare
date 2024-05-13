@@ -190,7 +190,7 @@ files = getFiles(path, size, userAgent)
 print("Found ", len(files), " files\n")
 
 # Sort the list of file names based on the extracted date
-sorted_file_names = sorted(file_names, key=extract_date)
+sorted_file_names = sorted(files, key=extract_date)
 
 # Print the sorted list
 for file_name in sorted_file_names:
