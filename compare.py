@@ -217,7 +217,7 @@ def countUniqueUnstable(files):
 # get all files from UA
 files = getAllFiles(path, userAgent)
 
-# sorted_file_names = sorted(files, key=extractDateTime)
+sorted_file_names = sorted(files, key=extractDateTime)
 
 # Print the sorted list
 # for file_name in sorted_file_names:
