@@ -85,6 +85,7 @@ def getUnstableFiles(dir, excludeSize, userAgent):
                     if os.path.getsize(filePath) != excludeSize and (userAgent in file) and 'base' not in file and i <= 10000:
                         if file not in matchingFiles:
                             matchingFiles.append(filePath)
+                            i = i + 1
 
     except Exception as e:
         print(f"Error: {e}")
