@@ -96,7 +96,7 @@ def getChangedFiles(files):
     numChanges = 0
     prevFileSize = None
     
-    for file in unstableFiles:
+    for file in files:
         if prevFileSize is not None and os.path.getsize(file) != prevFileSize:
             print(file)
             numChanges = numChanges + 1
