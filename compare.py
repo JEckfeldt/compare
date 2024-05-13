@@ -54,17 +54,19 @@ def extractDateTime(file_name):
     else:
         return datetime.min  # Default value if date is not found
 
-# get the first 10000 files from a list
+# get the first 10000 files from a list matching a userAgent (Minus the base)
 def getAllFiles(dir, userAgent):
     matching = []
+    limit = 1
     try:
         # Get all files with useragent
         for root, dirs, files, in os.walk(dir):
             for file in files:
                 filePath = os.path.join(root, file)
                 if os.path.isfile(filePath):
-                    if userAgent in file and 'base' not in filePath:
+                    if userAgent in file and 'base' not in filePath and limit <= 10000:
                         matching.append(filePath)
+                        limit = limit + 1
     except Exception as e:
         print(f"Error: {e}")
     return matching
@@ -207,6 +209,7 @@ def countUniqueUnstable(files):
 
 # get all files from UA
 files = getAllFiles(path, userAgent)
+print(len(files))
 
 sorted_file_names = sorted(files, key=extractDateTime)
 
