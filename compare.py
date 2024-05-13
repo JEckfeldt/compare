@@ -1,6 +1,7 @@
 import os
 import json
 import re
+from datetime import datetime
 
 # Dir Path to search
 path = '/home/xu/f5/testsite/json'
@@ -45,12 +46,13 @@ userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML
 # userAgent = 'Mozilla_5_0__X11__Ubuntu__Linux_x86_64__rv_125_0__Gecko_20100101_Firefox_125_0_'
 
 
-def extract_date(file_name):
-    match = re.search(r'\d{4}-\d{2}-\d{2}', file_name)
+# Define a function to extract the date and time from the file name
+def extractDateTime(file_name):
+    match = re.search(r'(\d{4}-\d{2}-\d{2}T\d{2}-\d{2}-\d{2})', file_name)
     if match:
-        return match.group()
+        return datetime.strptime(match.group(), '%Y-%m-%dT%H-%M-%S')
     else:
-        return "0000-00-00"  # Default value if date is not found
+        return datetime.min  # Default value if date is not found
 
 # Return list of files not matching certain size
 # Also match the user agent
@@ -191,7 +193,7 @@ files = getFiles(path, size, userAgent)
 print("Found ", len(files), " files\n")
 
 # Sort the list of file names based on the extracted date
-sorted_file_names = sorted(files, key=extract_date)
+sorted_file_names = sorted(files, key=extractDateTime)
 
 # Print the sorted list
 for file_name in sorted_file_names:
