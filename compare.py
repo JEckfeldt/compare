@@ -88,15 +88,15 @@ def getChangedFiles(dir, userAgent):
                 if os.path.isfile(filePath):
                     if userAgent in file:
                         files.append(filePath)
-
-        # sort the list by date
-        sortedFiles = sorted(files, key=extractDateTime)
-
-        for file in sortedFiles:
-            print(file)
-
     except Exception as e:
         print(f"Error: {e}")
+
+    # sort the list by date
+    sortedFiles = sorted(files, key=extractDateTime)
+
+    for file in sortedFiles:
+        print(file)
+
     return numChanges
 
 
