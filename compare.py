@@ -104,6 +104,7 @@ def getChangedFiles(files):
     for file in files:
         currFileSize = os.path.getsize(file)
         if currFileSize != prevFileSize:
+            print(file)
             numChanges = numChanges + 1
         prevFileSize = currFileSize
 
