@@ -223,4 +223,4 @@ sorted_file_names = sorted(files, key=extractDateTime)
 # for file_name in sorted_file_names:
 #     print(file_name)
 
-# print(getChangedFiles(sorted_file_names))
+print(getChangedFiles(sorted_file_names))
