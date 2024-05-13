@@ -64,7 +64,7 @@ def getAllFiles(dir, userAgent):
                 filePath = os.path.join(root, file)
                 if os.path.isfile(filePath):
                     if userAgent in file:
-                        userFiles.append(filePath)
+                        files.append(filePath)
     except Exception as e:
         print(f"Error: {e}")
     
