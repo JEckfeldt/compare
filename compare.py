@@ -50,7 +50,7 @@ def extract_date(file_name):
     if match:
         return match.group()
     else:
-        return None
+        return "0000-00-00"  # Default value if date is not found
 
 # Return list of files not matching certain size
 # Also match the user agent
