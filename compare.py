@@ -94,6 +94,7 @@ def getFiles(dir, excludeSize, userAgent):
 def getChangedFiles(files):
     numChanges = 0
     prevFileSize = 0
+    i = 0
 
     # Remove the base
     base = next((file for file in files if 'base' in file), None)
@@ -105,6 +106,7 @@ def getChangedFiles(files):
     for file in unstableFiles:
         if prevFileSize is not None and os.path.getsize(file) != prevFileSize:
             print(file)
+            print("Iteration: ", i)
             numChanges = numChanges + 1
         prevFileSize = os.path.getsize(file)
 
