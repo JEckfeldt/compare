@@ -101,7 +101,7 @@ def getChangedFiles(files):
         unstableFiles = [file for file in files if 'base' not in file]
         print("Unstable items: ", len(unstableFiles), '\n')
         print("Base: ", base)
-    for file in files:
+    for file in unstableFiles:
         currFileSize = os.path.getsize(file)
         if currFileSize != prevFileSize:
             print(file)
