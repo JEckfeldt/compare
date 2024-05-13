@@ -11,9 +11,9 @@ size = 18 # file size to exclude
 # Firefox
 # userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__rv_125_0__Gecko_20100101_Firefox_125_0_'
 # Edge
-# userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_124_0_0_0_Safari_537_36_Edg_124_0_0_0_'
+userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_124_0_0_0_Safari_537_36_Edg_124_0_0_0_'
 # Chrome
-userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_124_0_0_0_Safari_537_36'
+# userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_124_0_0_0_Safari_537_36'
 # userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_123_0_0_0_Safari_537_36'
 
 # Macbook (Macintosh)
@@ -64,7 +64,7 @@ def getAllFiles(dir, userAgent):
             for file in files:
                 filePath = os.path.join(root, file)
                 if os.path.isfile(filePath):
-                    if userAgent in file and 'base' not in file and limit <= 10000 and 'Edg' not in file:
+                    if userAgent in file and 'base' not in file and limit <= 10000:
                         matching.append(filePath)
                         limit = limit + 1
     except Exception as e:
@@ -82,7 +82,7 @@ def getUnstableFiles(dir, excludeSize, userAgent):
                 filePath = os.path.join(root, file)
                 # if file is valid, is not the normal size, and the userAgent is in filename
                 if os.path.isfile(filePath):
-                    if os.path.getsize(filePath) != excludeSize and (userAgent in file) and 'base' not in file and 'Edg' not in file:
+                    if os.path.getsize(filePath) != excludeSize and (userAgent in file) and 'base' not in file:
                         if file not in matchingFiles:
                             matchingFiles.append(filePath)
 
