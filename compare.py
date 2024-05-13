@@ -72,7 +72,7 @@ def getAllFiles(dir, userAgent):
     return matching
 
 # Return list of files not matching certain size
-def getFiles(dir, excludeSize, userAgent):
+def getUnstableFiles(dir, excludeSize, userAgent):
     matchingFiles = []
     i = 0
     try:
@@ -85,8 +85,7 @@ def getFiles(dir, excludeSize, userAgent):
                     if os.path.getsize(filePath) != excludeSize and (userAgent in file):
                         if file not in matchingFiles:
                             matchingFiles.append(filePath)
-                    # elif os.path.getsize(filePath) == excludeSize and (userAgent in file):
-                    #     print(file)
+
     except Exception as e:
         print(f"Error: {e}")
     return matchingFiles
@@ -146,15 +145,8 @@ def getFonts(files):
 # Return a count of how many attributes are appearing unstable
 def countUnstable(files):
     unstable = {} # result
-    # remove the base from the list
-    base = next((file for file in files if 'base' in file), None)
-    if base is not None:
-        unstableFiles = [file for file in files if 'base' not in file]
-        # print("Unstable items: ", len(unstableFiles), '\n')
-        # print("Base: ", base)
-        
-    
-    for file in unstableFiles:
+         
+    for file in files:
         if not os.path.exists(file):
             print("File not found")
             continue
@@ -210,9 +202,9 @@ def findNumChanges():
     files = getAllFiles(path, userAgent)
     sorted_file_names = sorted(files, key=extractDateTime)
     print("Files sorted: ", len(sorted_file_names))
-    for file in sorted_file_names:
-        print(file)
     print("Number of changes: ", getChangedFiles(sorted_file_names))
+    print("Unstable Attributes: ", countUnstable(getUnstableFiles(path, size, userAgent)))
 
 
 findNumChanges()
+
