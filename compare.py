@@ -208,7 +208,7 @@ print("Found ", len(files), " files\n")
 # get all files from UA
 # files = getAllFiles(path, userAgent)
 
-sorted_file_names = sorted(files, key=extract_datetime)
+sorted_file_names = sorted(files, key=extractDateTime)
 
 # Print the sorted list
 for file_name in sorted_file_names:
