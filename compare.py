@@ -43,6 +43,14 @@ userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML
 # Firefox
 # userAgent = 'Mozilla_5_0__X11__Ubuntu__Linux_x86_64__rv_125_0__Gecko_20100101_Firefox_125_0_'
 
+
+def extract_date(file_name):
+    match = re.search(r'\d{4}-\d{2}-\d{2}', file_name)
+    if match:
+        return match.group()
+    else:
+        return None
+
 # Return list of files not matching certain size
 # Also match the user agent
 def getFiles(dir, excludeSize, userAgent):
@@ -63,6 +71,22 @@ def getFiles(dir, excludeSize, userAgent):
     except Exception as e:
         print(f"Error: {e}")
     return matchingFiles
+
+# Get the 1st 10000 files of a user agent, and count how many times the file size changes
+# def getChangedFiles(dir, userAgent):
+#     numChanges = 0
+#     try:
+#         # Walk through Dir
+#         for root, dirs, files, in os.walk(dir):
+#             for file in files:
+#                 filePath = os.path.join(root, file)
+#                 if os.path.isfile(filePath):
+#                     if userAgent in file:
+
+#     return numChanges
+
+
+
 
 # takes a list of filepaths gets the unstable fonts for firefox sheets
 def getFonts(files):
@@ -155,8 +179,8 @@ def countUniqueUnstable(files):
         except json.JSONDecodeError:
             print(f"Error decoding file ${file}")
             continue
-        if 'components' in data and 'canvas' in data['components'] and 'value' in data['components']['canvas'] and 'geometry' in data['components']['canvas']['value']:
-            uniques.add(data['components']['canvas']['value']['geometry']['new'])
+        if 'components' in data and 'canvas' in data['components'] and 'value' in data['components']['canvas'] and 'text' in data['components']['canvas']['value']:
+            uniques.add(data['components']['canvas']['value']['text']['new'])
                 
     return uniques
 
@@ -165,10 +189,18 @@ def countUniqueUnstable(files):
 files = getFiles(path, size, userAgent)
 print("Found ", len(files), " files\n")
 
+# Sort the list of file names based on the extracted date
+sorted_file_names = sorted(file_names, key=extract_date)
+
+# Print the sorted list
+for file_name in sorted_file_names:
+    print(file_name)
+
+
 # f = getFonts(files)
 # print(f)
 # print(len(f))
 
 # print(countUnstable(files))
 
-print(countUniqueUnstable(files))
+# print(countUniqueUnstable(files))
