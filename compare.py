@@ -90,9 +90,8 @@ def getChangedFiles(dir, userAgent):
                     if userAgent in file:
                         files.append(filePath)
                         print(file)
-                        
-
-
+    except Exception as e:
+        print(f"Error: {e}")
     return numChanges
 
 
