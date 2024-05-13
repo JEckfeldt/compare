@@ -93,8 +93,6 @@ def getFiles(dir, excludeSize, userAgent):
 # Get the 1st 10000 files of a user agent, and count how many times the file size changes
 def getChangedFiles(files):
     numChanges = 0
-    # sort the list by date
-    sortedFiles = sorted(files, key=extractDateTime)
 
     for file in sortedFiles:
         print(file)
@@ -211,5 +209,7 @@ print("Found ", len(files), " files\n")
 sorted_file_names = sorted(files, key=extractDateTime)
 
 # Print the sorted list
-for file_name in sorted_file_names:
-    print(file_name)
+# for file_name in sorted_file_names:
+#     print(file_name)
+
+print(getChangedFiles(sorted_file_names))
