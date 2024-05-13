@@ -201,11 +201,10 @@ def countUniqueUnstable(files):
     return uniques
 
 
-# # get all unstable visits from useragent
-# files = getFiles(path, size, userAgent)
-# print("Found ", len(files), " files\n")
+# get all unstable visits from useragent
+files = getFiles(path, size, userAgent)
+print("Found ", len(files), " files\n")
 
 # get all files from UA
-files = getAllFiles(path, userAgent)
+# files = getAllFiles(path, userAgent)
 
-changes = getChangedFiles(files)
