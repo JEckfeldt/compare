@@ -93,7 +93,6 @@ def getFiles(dir, excludeSize, userAgent):
 # Get the 1st 10000 files of a user agent, and count how many times the file size changes
 def getChangedFiles(files):
     numChanges = 0
-    currFileSize = 0
     prevFileSize = 0
     # Remove the base
     base = next((file for file in files if 'base' in file), None)
@@ -102,11 +101,10 @@ def getChangedFiles(files):
         print("Unstable items: ", len(unstableFiles), '\n')
         print("Base: ", base)
     for file in unstableFiles:
-        currFileSize = os.path.getsize(file)
-        if currFileSize != prevFileSize:
+        if prevFileSize is not None and os.path.getsize(file) != prevFileSize:
             print(file)
             numChanges = numChanges + 1
-        prevFileSize = currFileSize
+        prevFileSize = os.path.getsize(file)
 
     return numChanges
 
