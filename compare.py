@@ -210,6 +210,8 @@ def findNumChanges():
     files = getAllFiles(path, userAgent)
     sorted_file_names = sorted(files, key=extractDateTime)
     print("Files sorted: ", len(sorted_file_names))
+    for file in sorted_file_names:
+        print(file)
     print("Number of changes: ", getChangedFiles(sorted_file_names))
 
 
