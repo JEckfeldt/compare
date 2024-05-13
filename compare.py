@@ -79,17 +79,22 @@ def getFiles(dir, excludeSize, userAgent):
 def getChangedFiles(dir, userAgent):
     numChanges = 0
     files = []
-    # Sort the list of file names based on the extracted date
-    sorted_file_names = sorted(files, key=extractDateTime)
+
     try:
-        # Walk through Dir
+        # Get all files with useragent
         for root, dirs, files, in os.walk(dir):
             for file in files:
                 filePath = os.path.join(root, file)
                 if os.path.isfile(filePath):
                     if userAgent in file:
                         files.append(filePath)
-                        print(file)
+
+        # sort the list by date
+        sortedFiles = sorted(files, key=extractDateTime)
+
+        for file in sortedFiles:
+            print(file)
+
     except Exception as e:
         print(f"Error: {e}")
     return numChanges
