@@ -76,17 +76,24 @@ def getFiles(dir, excludeSize, userAgent):
     return matchingFiles
 
 # Get the 1st 10000 files of a user agent, and count how many times the file size changes
-# def getChangedFiles(dir, userAgent):
-#     numChanges = 0
-#     try:
-#         # Walk through Dir
-#         for root, dirs, files, in os.walk(dir):
-#             for file in files:
-#                 filePath = os.path.join(root, file)
-#                 if os.path.isfile(filePath):
-#                     if userAgent in file:
+def getChangedFiles(dir, userAgent):
+    numChanges = 0
+    files = []
+    # Sort the list of file names based on the extracted date
+    sorted_file_names = sorted(files, key=extractDateTime)
+    try:
+        # Walk through Dir
+        for root, dirs, files, in os.walk(dir):
+            for file in files:
+                filePath = os.path.join(root, file)
+                if os.path.isfile(filePath):
+                    if userAgent in file:
+                        files.append(filePath)
+                        print(file)
+                        
 
-#     return numChanges
+
+    return numChanges
 
 
 
@@ -192,13 +199,8 @@ def countUniqueUnstable(files):
 files = getFiles(path, size, userAgent)
 print("Found ", len(files), " files\n")
 
-# Sort the list of file names based on the extracted date
-sorted_file_names = sorted(files, key=extractDateTime)
 
-# Print the sorted list
-for file_name in sorted_file_names:
-    print(file_name)
-
+changes = getChangedFiles(path, userAgent)
 
 # f = getFonts(files)
 # print(f)
