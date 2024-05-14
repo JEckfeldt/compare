@@ -126,7 +126,7 @@ def getChangedAttributes(files):
             # Count when we see something new 
             components = data.get("components", {})
             for value in components.keys():
-                if value in unstable:
+                if value in changes:
                     changes[value] += 1
                 else:
                     # print(file)
