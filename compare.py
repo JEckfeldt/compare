@@ -248,5 +248,8 @@ def compareWindowsEdg():
     chromeFiles = getAllFiles(path, 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_124_0_0_0_Safari_537_36', False)
     combined = windowsFiles + chromeFiles
     print("combined len: ", len(combined))
+    sortedCombined = sorted(combined, key=extractDateTime)
+    print("Number of changes: ", getChangedFiles(sorted_file_names))
+    print("Changes for Unstable Attributes: ", getChangedAttributes(sorted_file_names))
 compareWindowsEdg()
 
