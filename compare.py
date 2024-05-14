@@ -55,7 +55,7 @@ def extractDateTime(file_name):
         return datetime.min  # Default value if date is not found 
 
 # get the first 10000 files from a list matching a userAgent (Minus the base)
-def getAllFiles(dir, userAgent):
+def getAllFiles(dir, userAgent, isEdge):
     matching = []
     limit = 1
     try:
@@ -64,7 +64,10 @@ def getAllFiles(dir, userAgent):
             for file in files:
                 filePath = os.path.join(root, file)
                 if os.path.isfile(filePath):
-                    if userAgent in file and 'base' not in file and limit <= 10000:
+                    if userAgent in file and 'base' not in file and limit <= 10000 and isEdge:
+                        matching.append(filePath)
+                        limit = limit + 1
+                    elif userAgent in file and 'base' not in file and limit <= 10000 and 'Edg' not in file:
                         matching.append(filePath)
                         limit = limit + 1
     except Exception as e:
@@ -240,7 +243,9 @@ def findNumChanges():
     print("Unstable Attributes: ", countUnstable(getUnstableFiles(path, size, userAgent)))
     print("Changes for Unstable Attributes: ", getChangedAttributes(sorted_file_names))
 
+def compareWindowsEdg():
+    windowsFiles = getAllFiles(path, 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_124_0_0_0_Safari_537_36_Edg_124_0_0_0_', true)
+    chromeFiles = getAllFiles(path, 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_124_0_0_0_Safari_537_36', false)
 
-
-findNumChanges()
+compareWindowsEdg()
 
