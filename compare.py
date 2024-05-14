@@ -246,6 +246,7 @@ def findNumChanges():
 def compareWindowsEdg():
     windowsFiles = getAllFiles(path, 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_124_0_0_0_Safari_537_36_Edg_124_0_0_0_', True)
     chromeFiles = getAllFiles(path, 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_124_0_0_0_Safari_537_36', False)
-
+    combined = windowsFiles + chromeFiles
+    print("combined len: ", len(combined))
 compareWindowsEdg()
 
