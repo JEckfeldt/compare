@@ -52,7 +52,7 @@ def extractDateTime(file_name):
     if match:
         return datetime.strptime(match.group(), '%Y-%m-%dT%H-%M-%S')
     else:
-        return datetime.min  # Default value if date is not found
+        return datetime.min  # Default value if date is not found 
 
 # get the first 10000 files from a list matching a userAgent (Minus the base)
 def getAllFiles(dir, userAgent):
@@ -99,10 +99,41 @@ def getChangedFiles(files):
     for file in files:
         if prevFileSize is not None and os.path.getsize(file) != prevFileSize:
             print(file)
+            # get the unstable attribute for the file and create a changes object
             numChanges = numChanges + 1
         prevFileSize = os.path.getsize(file)
 
     return numChanges
+
+# count how many times attributes are changed in a file
+def getChangedAttributes(files):
+    changes = {}
+    prevFileSize = None
+    
+    for file in files:
+        if prevFileSize is not None and os.path.getsize(file) != prevFileSize:
+            # print(file)
+            # get the unstable attribute for the file and create a changes object
+            if not os.path.exists(file):
+                print("File not found")
+                continue
+            try:
+                with open(file, 'r') as file:
+                    data = json.load(file)
+            except json.JSONDecodeError:
+                print(f"Error decoding file ${file}")
+                continue
+            # Count when we see something new 
+            components = data.get("components", {})
+            for value in components.keys():
+                if value in unstable:
+                    changes[value] += 1
+                else:
+                    # print(file)
+                    changes[value] = 1
+        prevFileSize = os.path.getsize(file)
+
+    return changes
 
 # gets the unstable fonts for firefox sheets
 def getFonts(files):
@@ -205,6 +236,8 @@ def findNumChanges():
     print("Files sorted: ", len(sorted_file_names))
     print("Number of changes: ", getChangedFiles(sorted_file_names))
     print("Unstable Attributes: ", countUnstable(getUnstableFiles(path, size, userAgent)))
+    print("Changes for Unstable Attributes: ", getChangedAttributes(files))
+
 
 
 findNumChanges()
