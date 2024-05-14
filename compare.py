@@ -130,7 +130,8 @@ def getChangedAttributes(files):
                 if value in changes:
                     changes[value] += 1
                 else:
-                    # print(file)
+                    if value is not 'fonts':
+                        print(file)
                     changes[value] = 1
 
         prevFileSize = os.path.getsize(file)
