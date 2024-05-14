@@ -237,7 +237,7 @@ def findNumChanges():
     print("Files sorted: ", len(sorted_file_names))
     print("Number of changes: ", getChangedFiles(sorted_file_names))
     print("Unstable Attributes: ", countUnstable(getUnstableFiles(path, size, userAgent)))
-    print("Changes for Unstable Attributes: ", getChangedAttributes(files))
+    print("Changes for Unstable Attributes: ", getChangedAttributes(sorted_file_names))
 
 
 
