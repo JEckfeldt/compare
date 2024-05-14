@@ -132,6 +132,7 @@ def getChangedAttributes(files):
                 else:
                     # print(file)
                     changes[value] = 1
+
         prevFileSize = os.path.getsize(file)
 
     return changes
