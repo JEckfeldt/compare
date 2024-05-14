@@ -111,7 +111,7 @@ def getChangedAttributes(files):
     prevFileSize = None
     
     for file in files:
-        print(file)
+        # print(file)
         if prevFileSize is not None and os.path.getsize(file) != prevFileSize:
             # print(file)
             # get the unstable attribute for the file and create a changes object
