@@ -130,7 +130,7 @@ def getChangedAttributes(files):
                 if value in changes:
                     changes[value] += 1
                 else:
-                    if value != 'fonts':
+                    # if value != 'fonts':
                         # print(file)
                     changes[value] = 1
 
