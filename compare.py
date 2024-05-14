@@ -119,8 +119,8 @@ def getChangedAttributes(files):
                 print("File not found")
                 continue
             try:
-                with open(file, 'r') as file:
-                    data = json.load(file)
+                with open(file, 'r') as jsonFile:
+                    data = json.load(jsonFile)
             except json.JSONDecodeError:
                 print(f"Error decoding file ${file}")
                 continue
