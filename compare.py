@@ -113,7 +113,7 @@ def getChangedAttributes(files):
     for file in files:
         # print(file)
         if prevFileSize is not None and os.path.getsize(file) != prevFileSize:
-            # print(file)
+            print(file)
             # get the unstable attribute for the file and create a changes object
             if not os.path.exists(file):
                 print("File not found")
@@ -196,7 +196,7 @@ def countUnstable(files):
             if value in unstable:
                 unstable[value] += 1
             else:
-                # print(file)
+                print(file)
                 unstable[value] = 1
 
     return unstable
