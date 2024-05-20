@@ -264,13 +264,15 @@ def countUniqueUnstable(files):
 # gets number of changes for userAgent
 def findNumChanges():
     files = getAllFiles(path, userAgent)
-    sorted_file_names = sorted(files, key=extractDateTime)
+    unstableFiles = getUnstableFiles(path, size, userAgent)
+    sortedUnstableFiles = sorted(unstableFiles, key=extractDateTime)
+    sortedFiles = sorted(files, key=extractDateTime)
     print("UserAgent: ", userAgent)
-    print("Files sorted: ", len(sorted_file_names))
-    print("Number of changes: ", getChangedFiles(sorted_file_names))
-    print("Unstable Attributes: ", countUnstable(getUnstableFiles(path, size, userAgent)))
-    print("Changes for Unstable Attributes: ", getChangedAttributes(sorted_file_names))
-    print("Changes for fonts: ", getFonts(getUnstableFiles(path, size, userAgent)))
+    print("Files sorted: ", len(sortedFiles))
+    print("Number of changes: ", getChangedFiles(sortedFiles))
+    print("Unstable Attributes: ", countUnstable(sortedUnstableFiles))
+    print("Changes for Unstable Attributes: ", getChangedAttributes(sortedFiles))
+    print("Changes for fonts: ", getFonts(sortedUnstableFiles))
 
 findNumChanges()
 
