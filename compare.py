@@ -280,6 +280,7 @@ def findNumChanges():
     print("Number of changes: ", getChangedFiles(sorted_file_names))
     print("Unstable Attributes: ", countUnstable(getUnstableFiles(path, size, userAgent)))
     print("Changes for Unstable Attributes: ", getChangedAttributes(sorted_file_names))
+    print("Changes for fonts: ", getFonts(sorted_file_names))
 
 findNumChanges()
 
