@@ -182,7 +182,7 @@ def getFonts(files):
     results = {}
     baseFonts = set()
     newFonts = set()
-    for file in unstableFiles:
+    for file in files:
         try:
             # Load file
             with open(file) as json_file:
