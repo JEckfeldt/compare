@@ -41,7 +41,7 @@ fonts = [
   'Verdana',
   'Wingdings',
   'Wingdings 3',
-  'Helkevtrica', // Should always be absent on well-behaved systems.
+  'Helkevtrica',
 ]
 
 # Dir Path to search
