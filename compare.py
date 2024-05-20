@@ -187,7 +187,7 @@ def getFonts(files):
             # Load file
             with open(file) as json_file:
                 data = json.load(json_file)
-            # Check what we want exists
+            # Check if the fonts are unstable
             if 'components' in data and 'fonts' in data['components'] and 'value' in data['components']['fonts']:
                 # Get the new elements
                 for fontId, fontData in data['components']['fonts']['value'].items():
@@ -275,7 +275,7 @@ def findNumChanges():
     print("Number of changes: ", getChangedFiles(sortedFiles))
     print("Unstable Attributes: ", countUnstable(sortedUnstableFiles))
     print("Changes for Unstable Attributes: ", getChangedAttributes(sortedFiles))
-    print("Changes for fonts: ", getFonts(sortedUnstableFiles))
+    print("Changes for fonts: ", getFonts(sortedFiles))
 
 findNumChanges()
 
