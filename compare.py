@@ -3,6 +3,47 @@ import json
 import re
 from datetime import datetime
 
+# The f5 fonts we need
+fonts = [
+  'Andale Mono', 'Arial Narrow', 'Arial Unicode MS', 'Batang', 'Bell MT', 'Brush Script', 'Brush Script MT', 'Calibri', 'Charter', 'Courier', 'Courier New',
+  'Curlz MT',
+  'DejaVu Sans',
+  'DejaVu Sans Mono',
+  'DejaVu Serif Condensed',
+  'Droid Sans',
+  'Droid Sans Fallback',
+  'Droid Serif',
+  'Forte',
+  'Futura',
+  'Geneva',
+  'Hei',
+  'Leelawadee',
+  'Levenim MT',
+  'Liberation Sans',
+  'Liberation Sans Narrow',
+  'Marlett',
+  'Meiryo UI',
+  'Microsoft Uighur',
+  'Microsoft YaHei UI',
+  'MS Mincho',
+  'MS UI Gothic',
+  'NanumGothic',
+  'Nirmala UI',
+  'Palatino',
+  'Papyrus',
+  'PMingLiU',
+  'PT Serif',
+  'SimHei',
+  'STIXVariants',
+  'STSong',
+  'Traditional Arabic',
+  'Urdu Typesetting',
+  'Verdana',
+  'Wingdings',
+  'Wingdings 3',
+  'Helkevtrica', // Should always be absent on well-behaved systems.
+]
+
 # Dir Path to search
 path = '/home/xu/f5/testsite/json'
 size = 18 # file size to exclude
@@ -55,7 +96,7 @@ def extractDateTime(file_name):
         return datetime.min  # Default value if date is not found 
 
 # get the first 10000 files from a list matching a userAgent (Minus the base)
-def getAllFiles(dir, userAgent, isEdge):
+def getAllFiles(dir, userAgent):
     matching = []
     limit = 1
     try:
@@ -64,10 +105,7 @@ def getAllFiles(dir, userAgent, isEdge):
             for file in files:
                 filePath = os.path.join(root, file)
                 if os.path.isfile(filePath):
-                    if userAgent in file and 'base' not in file and limit <= 10000 and isEdge:
-                        matching.append(filePath)
-                        limit = limit + 1
-                    elif userAgent in file and 'base' not in file and limit <= 10000 and 'Edg' not in file:
+                    if userAgent in file and 'base' not in file and limit <= 10000:
                         matching.append(filePath)
                         limit = limit + 1
     except Exception as e:
@@ -243,13 +281,15 @@ def findNumChanges():
     print("Unstable Attributes: ", countUnstable(getUnstableFiles(path, size, userAgent)))
     print("Changes for Unstable Attributes: ", getChangedAttributes(sorted_file_names))
 
-def compareWindowsEdg():
-    windowsFiles = getAllFiles(path, 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_124_0_0_0_Safari_537_36_Edg_124_0_0_0_', True)
-    chromeFiles = getAllFiles(path, 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_124_0_0_0_Safari_537_36', False)
-    combined = windowsFiles + chromeFiles
-    print("combined len: ", len(combined))
-    sortedCombined = sorted(combined, key=extractDateTime)
-    print("Number of changes: ", getChangedFiles(sortedCombined))
-    print("Changes for Unstable Attributes: ", getChangedAttributes(sortedCombined))
-compareWindowsEdg()
+findNumChanges()
+
+# def compareWindowsEdg():
+#     windowsFiles = getAllFiles(path, 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_124_0_0_0_Safari_537_36_Edg_124_0_0_0_', True)
+#     chromeFiles = getAllFiles(path, 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_124_0_0_0_Safari_537_36', False)
+#     combined = windowsFiles + chromeFiles
+#     print("combined len: ", len(combined))
+#     sortedCombined = sorted(combined, key=extractDateTime)
+#     print("Number of changes: ", getChangedFiles(sortedCombined))
+#     print("Changes for Unstable Attributes: ", getChangedAttributes(sortedCombined))
+# compareWindowsEdg()
 
