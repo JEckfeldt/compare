@@ -180,7 +180,8 @@ def getChangedAttributes(files):
 # gets the unstable fonts for firefox sheets
 def getFonts(files):
     results = {}
-
+    baseFonts = set()
+    newFonts = set()
     for file in unstableFiles:
         try:
             # Load file
@@ -189,8 +190,9 @@ def getFonts(files):
             # Check what we want exists
             if 'components' in data and 'fonts' in data['components'] and 'value' in data['components']['fonts']:
                 # Get the new elements
-                newFonts = set([value['new'] for value in data['components']['fonts']['value'].values() if 'new' in value])
-                baseFonts set([value['original'] for value in data['components']['fonts']['value'].values() if 'original' in value])
+                for fontId, fontData in data['components']['fonts']['values'].items():
+                    baseFonts.add(fontData['original'])
+                    newFonts.add(fontData['new'])
                 notShared = newFonts ^ baseFonts
                 for font in notShared:
                     if font in results:
