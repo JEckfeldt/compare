@@ -190,20 +190,21 @@ def getFonts(files):
             # Check what we want exists
             if 'components' in data and 'fonts' in data['components'] and 'value' in data['components']['fonts']:
                 # Get the new elements
-                for fontId, fontData in data['components']['fonts']['values'].items():
+                for fontId, fontData in data['components']['fonts']['value'].items():
                     baseFonts.add(fontData['original'])
                     newFonts.add(fontData['new'])
-                notShared = newFonts ^ baseFonts
-                for font in notShared:
-                    if font in results:
-                        results[font] += 1
-                    else:
-                        results[font] = 1
             else:
                 print("Required keys not found in the JSON file.", file)
         except Exception as e:
             print(file)
             print(f"Error: {e}")
+    # End loop
+    notShared = newFonts ^ baseFonts
+    for font in notShared:
+        if font in results:
+            results[font] += 1
+        else:
+            results[font] = 1
     return results
 
 # Return a count of how many attributes are appearing unstable
