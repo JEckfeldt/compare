@@ -207,7 +207,7 @@ def getFonts(files):
     #         results[font] += 1
     #     else:
     #         results[font] = 1
-    return newFonts | baseFonts
+    return newFonts
 
 # Return a count of how many attributes are appearing unstable
 def countUnstable(files):
