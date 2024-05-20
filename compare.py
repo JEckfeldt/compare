@@ -191,8 +191,10 @@ def getFonts(files):
             if 'components' in data and 'fonts' in data['components'] and 'value' in data['components']['fonts']:
                 # Get the new elements
                 for fontId, fontData in data['components']['fonts']['value'].items():
-                    baseFonts.add(fontData['original'])
-                    newFonts.add(fontData['new'])
+                    if "original" in fontData:
+                        baseFonts.add(fontData['original'])
+                    if "new" in fontData
+                        newFonts.add(fontData['new'])
             else:
                 print("Required keys not found in the JSON file.", file)
         except Exception as e:
