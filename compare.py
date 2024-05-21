@@ -188,7 +188,6 @@ def getFonts(files):
                         baseFonts[fontData["original"]] = baseFonts.get(fontData["original"], 0) + 1
                     if "new" in fontData:
                         newFonts[fontData["new"]] = baseFonts.get(fontData["new"], 0) + 1
-                    
         except Exception as e:
             print(file)
             print(f"Error: {e}")
@@ -199,7 +198,7 @@ def getFonts(files):
             # add it to the results
             results[key] = value
 
-    return newFonts
+    return results
 
 
 # gets number of changes for userAgent
