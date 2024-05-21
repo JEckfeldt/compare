@@ -134,17 +134,16 @@ def getUnstableFiles(dir, excludeSize, userAgent):
 
 # count how many times the file size changed
 def getChangedFiles(files):
-    numChanges = 0
     prevFileSize = None
-    
+    changes = []
     for file in files:
         if prevFileSize is not None and os.path.getsize(file) != prevFileSize:
             # print(file)
             # get the unstable attribute for the file and create a changes object
-            numChanges = numChanges + 1
+            changes.append(file)
         prevFileSize = os.path.getsize(file)
 
-    return numChanges
+    return changes
 
 # count what attributes are changed when the file size changes
 def getChangedAttributes(files):
@@ -213,11 +212,10 @@ def getFonts(files):
 def findNumChanges():
     files = getAllFiles(path, userAgent)
     sortedFiles = sorted(files, key=extractDateTime)
-    for file in sortedFiles:
-        print(file)
-    # print("UserAgent: ", userAgent)
-    # print("Files sorted: ", len(sortedFiles))
-    # print("Number of changes: ", getChangedFiles(sortedFiles))
+    print("UserAgent: ", userAgent)
+    print("Files sorted: ", len(sortedFiles))
+    print("Number of changes: ", len(getChangedFiles(sortedFiles)))
+    print("Changed files: ", )
     # print("Changes for Attributes: ", getChangedAttributes(sortedFiles))
     # print("Changes for fonts: ", getFonts(sortedFiles))
 
