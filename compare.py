@@ -174,6 +174,7 @@ def getChangedAttributes(files):
 def getFonts(files):
     baseFonts = set()
     newFonts = set()
+    testFonts = set(f5Fonts)
     results = {}
     for file in files:
         try:
@@ -193,7 +194,7 @@ def getFonts(files):
             print(f"Error: {e}")
     # End loop
 
-    return baseFonts ^ newFonts
+    return newFonts & testFonts
 
 
 # gets number of changes for userAgent
