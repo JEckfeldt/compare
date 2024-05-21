@@ -193,21 +193,20 @@ def getFonts(files):
                     if "new" in fontData:
                         uniqueNew.add(fontData["new"])
                         newFonts[fontData["new"]] = newFonts.get(fontData["new"], 0) + 1
-                uniqueChanged = uniqueNew - uniqueOriginal
-                print(uniqueChanged)
+
+                # compare the fonts of current file, and log them
+                uniqueChanged = uniqueNew ^ uniqueOriginal
                 for font in uniqueChanged:
                     if font in testFonts:
                         results[font] = results.get(font, 0) + 1 
+                # clear the sets for the next file
                 uniqueNew.clear()
                 uniqueOriginal.clear()
                 uniqueChanged.clear()
+
         except Exception as e:
             print(file)
             print(f"Error: {e}")
-    # End loop
-    # for key, value in newFonts.items():
-    #     if key in testFonts:
-    #         results[key] = value
 
     return results
 
