@@ -146,7 +146,7 @@ def getChangedFiles(files):
 
     return numChanges
 
-# count how many times attributes are changed in a file
+# count what attributes are changed when the file size changes
 def getChangedAttributes(files):
     changes = {}
     prevFileSize = None
@@ -154,8 +154,7 @@ def getChangedAttributes(files):
     for file in files:
         # print(file)
         if prevFileSize is not None and os.path.getsize(file) != prevFileSize:
-            # print(file)
-            # get the unstable attribute for the file and create a changes object
+            # open the file
             if not os.path.exists(file):
                 print("File not found")
                 continue
@@ -165,7 +164,7 @@ def getChangedAttributes(files):
             except json.JSONDecodeError:
                 print(f"Error decoding file ${file}")
                 continue
-            # Count when we see something new 
+            # see what attributes are changing
             components = data.get("components", {})
             for value in components.keys():
                 if value in changes:
@@ -206,83 +205,17 @@ def getFonts(files):
 
     return results
 
-# Return a count of how many attributes are appearing unstable
-def countUnstable(files):
-    unstable = {} # result
-         
-    for file in files:
-        if not os.path.exists(file):
-            print("File not found")
-            continue
-        try:
-            with open(file, 'r') as file:
-                data = json.load(file)
-        except json.JSONDecodeError:
-            print(f"Error decoding file ${file}")
-            continue
-        # Count when we see something new 
-        components = data.get("components", {})
-        for value in components.keys():
-            if value in unstable:
-                unstable[value] += 1
-            else:
-                # print(file)
-                unstable[value] = 1
-
-    return unstable
-
-# Return the number of unique values per unstable attribute
-def countUniqueUnstable(files):
-    uniques = set()
-    # remove the base from the list
-    base = next((file for file in files if 'base' in file), None)
-    if base is not None:
-        unstableFiles = [file for file in files if 'base' not in file]
-        print("Unstable items: ", len(unstableFiles), '\n')
-        print("Base: ", base)
-    # Iterate through the files
-    for file in unstableFiles:
-        if not os.path.exists(file):
-            print("File not found")
-            continue
-        try:
-            with open(file, 'r') as file:
-                data = json.load(file)
-        except json.JSONDecodeError:
-            print(f"Error decoding file ${file}")
-            continue
-        if 'components' in data and 'canvas' in data['components'] and 'value' in data['components']['canvas'] and 'text' in data['components']['canvas']['value']:
-            uniques.add(data['components']['canvas']['value']['text']['new'])
-                
-    return uniques
-
-
-# # get all unstable visits from useragent
-# files = getFiles(path, size, userAgent)
-# print("Found ", len(files), " files\n")
 
 # gets number of changes for userAgent
 def findNumChanges():
     files = getAllFiles(path, userAgent)
-    unstableFiles = getUnstableFiles(path, size, userAgent)
-    sortedUnstableFiles = sorted(unstableFiles, key=extractDateTime)
     sortedFiles = sorted(files, key=extractDateTime)
     print("UserAgent: ", userAgent)
     print("Files sorted: ", len(sortedFiles))
     print("Number of changes: ", getChangedFiles(sortedFiles))
-    print("Unstable Attributes: ", countUnstable(sortedFiles))
-    print("Changes for Unstable Attributes: ", getChangedAttributes(sortedFiles))
+    print("Changes for Attributes: ", getChangedAttributes(sortedFiles))
     print("Changes for fonts: ", getFonts(sortedFiles))
 
 findNumChanges()
 
-# def compareWindowsEdg():
-#     windowsFiles = getAllFiles(path, 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_124_0_0_0_Safari_537_36_Edg_124_0_0_0_', True)
-#     chromeFiles = getAllFiles(path, 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_124_0_0_0_Safari_537_36', False)
-#     combined = windowsFiles + chromeFiles
-#     print("combined len: ", len(combined))
-#     sortedCombined = sorted(combined, key=extractDateTime)
-#     print("Number of changes: ", getChangedFiles(sortedCombined))
-#     print("Changes for Unstable Attributes: ", getChangedAttributes(sortedCombined))
-# compareWindowsEdg()
 
