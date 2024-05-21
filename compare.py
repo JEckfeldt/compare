@@ -180,6 +180,7 @@ def getChangedAttributes(files):
 def getFonts(files):
     baseFonts = {}
     newFonts = {}
+    results = {}
     for file in files:
         try:
             # Load file
@@ -193,17 +194,19 @@ def getFonts(files):
                         baseFonts[fontData["original"]] = baseFonts.get(fontData["original"], 0) + 1
                     if "new" in fontData:
                         newFonts[fontData["new"]] = baseFonts.get(fontData["new"], 0) + 1
+                    # get the list of what changed
+                    
         except Exception as e:
             print(file)
             print(f"Error: {e}")
     # End loop
-    results = {}
+ 
     for key, value in baseFonts.items():
         if key not in newFonts:
             # add it to the results
             results[key] = value
 
-    return results
+    return newFonts
 
 
 # gets number of changes for userAgent
