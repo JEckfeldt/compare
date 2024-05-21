@@ -192,11 +192,6 @@ def getFonts(files):
             print(file)
             print(f"Error: {e}")
     # End loop
- 
-    for key, value in baseFonts.items():
-        if key not in newFonts:
-            # add it to the results
-            results[key] = value
 
     return baseFonts ^ newFonts
 
