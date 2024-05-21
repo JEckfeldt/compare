@@ -198,12 +198,12 @@ def getFonts(files):
             print(f"Error: {e}")
     # End loop
     results = {}
-    for key, value in newFonts.items():
-        if key not in baseFonts:
+    for key, value in baseFonts.items():
+        if key not in newFonts:
             # add it to the results
             results[key] = value
 
-    return len(baseFonts) - len(newFonts)
+    return results
 
 
 # gets number of changes for userAgent
