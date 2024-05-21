@@ -175,6 +175,7 @@ def getFonts(files):
     baseFonts = {}
     newFonts = {}
     testFonts = set(f5Fonts)
+    uniqueNew = set()
     results = {}
     for file in files:
         try:
@@ -188,9 +189,11 @@ def getFonts(files):
                     if "original" in fontData:
                         baseFonts[fontData["original"]] = baseFonts.get(fontData["original"], 0) + 1
                     if "new" in fontData:
-                        if fontData["new"] in testFonts:
-                           results[fontData["new"]] = results.get(fontData["new"], 0) + 1 
+                        uniqueNew.add(fontData["new"])
                         newFonts[fontData["new"]] = newFonts.get(fontData["new"], 0) + 1
+                for font in uniqueNew:
+                    if font in testFonts:
+                        results[fontData["new"]] = results.get(fontData["new"], 0) + 1 
         except Exception as e:
             print(file)
             print(f"Error: {e}")
