@@ -193,7 +193,7 @@ def getFonts(files):
                         newFonts[fontData["new"]] = newFonts.get(fontData["new"], 0) + 1
                 for font in uniqueNew:
                     if font in testFonts:
-                        results[fontData["new"]] = results.get(fontData["new"], 0) + 1 
+                        results[font] = results.get(font, 0) + 1 
         except Exception as e:
             print(file)
             print(f"Error: {e}")
