@@ -215,7 +215,7 @@ def findNumChanges():
     print("UserAgent: ", userAgent)
     print("Files sorted: ", len(sortedFiles))
     print("Number of changes: ", len(getChangedFiles(sortedFiles)))
-    print("Changed files: ", )
+    print("Changed files: ", getChangedFiles(sortedFiles))
     # print("Changes for Attributes: ", getChangedAttributes(sortedFiles))
     # print("Changes for fonts: ", getFonts(sortedFiles))
 
