@@ -172,8 +172,8 @@ def getChangedAttributes(files):
 
 # get the fonts that are changing in the files
 def getFonts(files):
-    baseFonts = set()
-    newFonts = set()
+    baseFonts = {}
+    newFonts = {}
     testFonts = set(f5Fonts)
     results = {}
     for file in files:
@@ -186,15 +186,18 @@ def getFonts(files):
                 # Get the fonts
                 for fontId, fontData in data['components']['fonts']['value'].items():
                     if "original" in fontData:
-                        baseFonts.add(fontData["original"])
+                        baseFonts[fontData["original"]] = baseFonts.get(fontData["original"], 0) + 1
                     if "new" in fontData:
-                        newFonts.add(fontData["new"])
+                        newFonts[fontData["new"]] = newFonts.get(fontData["new"], 0) + 1
         except Exception as e:
             print(file)
             print(f"Error: {e}")
     # End loop
+    for key, value in newFonts.items():
+        if key in testFonts:
+            results[key] = value
 
-    return newFonts & testFonts
+    return results
 
 
 # gets number of changes for userAgent
