@@ -197,7 +197,7 @@ def getFonts(files):
         if key in testFonts:
             results[key] = value
 
-    return results
+    return results.keys()
 
 
 # gets number of changes for userAgent
