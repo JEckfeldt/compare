@@ -180,8 +180,8 @@ def getChangedAttributes(files):
 # gets the unstable fonts for firefox sheets
 def getFonts(files):
     # results = {}
-    baseFonts = set()
-    newFonts = set()
+    baseFonts = {}
+    newFonts = {}
     for file in files:
         try:
             # Load file
@@ -192,9 +192,9 @@ def getFonts(files):
                 # Get the new elements
                 for fontId, fontData in data['components']['fonts']['value'].items():
                     if "original" in fontData:
-                        baseFonts.add(fontData['original'])
+                        baseFonts[fontData["original"]] = baseFonts.get(fontData["original"], 0) + 1
                     if "new" in fontData:
-                        newFonts.add(fontData['new'])
+                        newFonts[fontData["new"]] = baseFonts.get(fontData["new"], 0) + 1
         except Exception as e:
             print(file)
             print(f"Error: {e}")
@@ -205,7 +205,8 @@ def getFonts(files):
     #         results[font] += 1
     #     else:
     #         results[font] = 1
-    return newFonts - baseFonts
+    new_only = {key: value for key, value in newFonts.items() if key not in baseFonts}
+    return new_only
 
 # Return a count of how many attributes are appearing unstable
 def countUnstable(files):
