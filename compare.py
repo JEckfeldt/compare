@@ -194,7 +194,7 @@ def getFonts(files):
                     if "original" in fontData:
                         baseFonts.add(fontData['original'])
                     if "new" in fontData:
-                        newFonts.add(fontData['new']))
+                        newFonts.add(fontData['new'])
         except Exception as e:
             print(file)
             print(f"Error: {e}")
