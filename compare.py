@@ -151,27 +151,22 @@ def getChangedAttributes(files):
     prevFileSize = None
     
     for file in files:
-        # print(file)
-        if prevFileSize is not None and os.path.getsize(file) != prevFileSize:
-            # open the file
-            if not os.path.exists(file):
-                print("File not found")
-                continue
-            try:
-                with open(file, 'r') as jsonFile:
-                    data = json.load(jsonFile)
-            except json.JSONDecodeError:
-                print(f"Error decoding file ${file}")
-                continue
-            # see what attributes are changing
-            components = data.get("components", {})
-            for value in components.keys():
-                if value in changes:
-                    changes[value] += 1
-                else:
-                    changes[value] = 1
-
-        prevFileSize = os.path.getsize(file)
+        if not os.path.exists(file):
+            print("File not found")
+            continue
+        try:
+            with open(file, 'r') as jsonFile:
+                data = json.load(jsonFile)
+        except json.JSONDecodeError:
+            print(f"Error decoding file ${file}")
+            continue
+        # see what attributes are changing
+        components = data.get("components", {})
+        for value in components.keys():
+            if value in changes:
+                changes[value] += 1
+            else:
+                changes[value] = 1
 
     return changes
 
@@ -216,7 +211,6 @@ def findNumChanges():
     print("UserAgent: ", userAgent)
     print("Files sorted: ", len(sortedFiles))
     print("Number of changes: ", len(changedFiles))
-    # print("Changed files: ", changedFiles)
     print("Changes for Attributes: ", getChangedAttributes(sortedFiles))
     # print("Changes for fonts: ", getFonts(sortedFiles))
 
