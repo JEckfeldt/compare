@@ -198,8 +198,13 @@ def getFonts(files):
             print(file)
             print(f"Error: {e}")
     # End loop
+    results = {}
+    for key, value in newFonts.items():
+        if key not in baseFonts:
+            # add it to the results
+            results[key] = value
 
-    return newFonts
+    return results
 
 # Return a count of how many attributes are appearing unstable
 def countUnstable(files):
