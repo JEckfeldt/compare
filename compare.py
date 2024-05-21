@@ -180,15 +180,14 @@ def getFonts(files):
             # Load file
             with open(file) as json_file:
                 data = json.load(json_file)
-            # Check if the fonts are unstable
+            # Check if the fonts are in the file (They changed)
             if 'components' in data and 'fonts' in data['components'] and 'value' in data['components']['fonts']:
-                # Get the new elements
+                # Get the fonts
                 for fontId, fontData in data['components']['fonts']['value'].items():
                     if "original" in fontData:
                         baseFonts[fontData["original"]] = baseFonts.get(fontData["original"], 0) + 1
                     if "new" in fontData:
                         newFonts[fontData["new"]] = baseFonts.get(fontData["new"], 0) + 1
-                    # get the list of what changed
                     
         except Exception as e:
             print(file)
@@ -212,7 +211,7 @@ def findNumChanges():
     print("Files sorted: ", len(sortedFiles))
     print("Number of changes: ", len(changedFiles))
     print("Changes for Attributes: ", getChangedAttributes(sortedFiles))
-    # print("Changes for fonts: ", getFonts(sortedFiles))
+    print("Changes for fonts: ", getFonts(sortedFiles))
 
 findNumChanges()
 
