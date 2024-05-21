@@ -4,7 +4,7 @@ import re
 from datetime import datetime
 
 # The f5 fonts we need
-fonts = [
+f5Fonts = [
   'Andale Mono', 'Arial Narrow', 'Arial Unicode MS', 'Batang', 'Bell MT', 'Brush Script', 'Brush Script MT', 'Calibri', 'Charter', 'Courier', 'Courier New',
   'Curlz MT',
   'DejaVu Sans',
@@ -176,7 +176,7 @@ def getChangedAttributes(files):
 
     return changes
 
-# gets the unstable fonts for firefox sheets
+# get the fonts that are changing in the files
 def getFonts(files):
     baseFonts = {}
     newFonts = {}
@@ -203,7 +203,7 @@ def getFonts(files):
             # add it to the results
             results[key] = value
 
-    return results
+    return len(baseFonts) - len(newFonts)
 
 
 # gets number of changes for userAgent
