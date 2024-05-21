@@ -177,6 +177,7 @@ def getFonts(files):
     testFonts = set(f5Fonts)
     uniqueOriginal = set()
     uniqueNew = set()
+    uniqueFontLists = set()
     results = {}
     for file in files:
         try:
@@ -197,9 +198,8 @@ def getFonts(files):
                 # compare the fonts of current file, and log them
                 uniqueChanged = uniqueNew ^ uniqueOriginal
                 for font in uniqueChanged:
-                    if font in testFonts:
-                        results[font] = results.get(font, 0) + 1
-                        results["changes"] = results.get("changes", 0) + 1 
+                    results[font] = results.get(font, 0) + 1
+                    results["changes"] = results.get("changes", 0) + 1 
                 # clear the sets for the next file
                 uniqueNew.clear()
                 uniqueOriginal.clear()
