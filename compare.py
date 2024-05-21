@@ -193,7 +193,7 @@ def getFonts(files):
             print(f"Error: {e}")
     # End loop
 
-    return baseFonts ^ newFonts
+    return newFonts - baseFonts
 
 
 # gets number of changes for userAgent
