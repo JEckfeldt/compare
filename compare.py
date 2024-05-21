@@ -188,7 +188,7 @@ def getFonts(files):
                     if "original" in fontData:
                         baseFonts[fontData["original"]] = baseFonts.get(fontData["original"], 0) + 1
                     if "new" in fontData:
-                        if fontData["new"] is in testFonts:
+                        if fontData["new"] in testFonts:
                            results[fontData["new"]] = results.get(fontData["new"], 0) + 1 
                         newFonts[fontData["new"]] = newFonts.get(fontData["new"], 0) + 1
         except Exception as e:
