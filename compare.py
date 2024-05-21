@@ -213,11 +213,13 @@ def getFonts(files):
 def findNumChanges():
     files = getAllFiles(path, userAgent)
     sortedFiles = sorted(files, key=extractDateTime)
-    print("UserAgent: ", userAgent)
-    print("Files sorted: ", len(sortedFiles))
-    print("Number of changes: ", getChangedFiles(sortedFiles))
-    print("Changes for Attributes: ", getChangedAttributes(sortedFiles))
-    print("Changes for fonts: ", getFonts(sortedFiles))
+    for file in sortedFiles:
+        print(file)
+    # print("UserAgent: ", userAgent)
+    # print("Files sorted: ", len(sortedFiles))
+    # print("Number of changes: ", getChangedFiles(sortedFiles))
+    # print("Changes for Attributes: ", getChangedAttributes(sortedFiles))
+    # print("Changes for fonts: ", getFonts(sortedFiles))
 
 findNumChanges()
 
