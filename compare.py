@@ -161,14 +161,15 @@ def getChangedAttributes(files):
             print(f"Error decoding file ${file}")
             continue
         # see what attributes are changing
-        if prevFileSize is not None and os.path.getsize(file) != prevFileSize:
+        if 'components' in data:
             components = data.get("components", {})
             for value in components.keys():
                 if value in changes:
                     changes[value] += 1
                 else:
                     changes[value] = 1
-        prevFileSize = os.path.getsize(file)
+        else:
+            print("no new changes in file")
     return changes
 
 # get the fonts that are changing in the files
@@ -203,7 +204,6 @@ def getFonts(files):
                 uniqueFontLists.add(frozenOriginal)
                 for font in uniqueChanged:
                     results[font] = results.get(font, 0) + 1
-                    results["changes"] = results.get("changes", 0) + 1 
                 # clear the sets for the next file
                 uniqueNew.clear()
                 uniqueOriginal.clear()
