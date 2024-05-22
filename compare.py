@@ -200,8 +200,8 @@ def getFonts(files):
                 fronzenOriginal = frozenset(uniqueOriginal)
                 uniqueFontLists.add(frozenUnique)
                 uniqueFontLists.add(fronzenOriginal)
-                frozenUnique.clear()
-                fronzenOriginal.clear()
+                frozenUnique = frozenset()
+                fronzenOriginal = frozenset()
                 for font in uniqueChanged:
                     results[font] = results.get(font, 0) + 1
                     results["changes"] = results.get("changes", 0) + 1 
