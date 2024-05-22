@@ -225,7 +225,7 @@ def findNumChanges():
     print("Files sorted: ", len(sortedFiles))
     print("Number of changes: ", len(changedFiles))
     print("Changes for Attributes: ", getChangedAttributes(sortedFiles))
-    print("Changes for fonts: ", len(getFonts(sortedFiles)))
+    print("Changes for fonts: ", getFonts(sortedFiles))
 
 findNumChanges()
 
