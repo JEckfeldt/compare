@@ -110,7 +110,7 @@ def getAllFiles(dir, userAgent, isChrome):
                             matching.append(filePath)
                             limit = limit + 1
                     else:
-                        if userAgent in file and 'base' not in file and limit <= 10000 and 'Edg' not in file:
+                        if userAgent in file and 'base' not in file and limit <= 10000:
                             matching.append(filePath)
                             limit = limit + 1
     except Exception as e:
