@@ -174,7 +174,6 @@ def getChangedAttributes(files):
 def getFonts(files):
     baseFonts = {}
     newFonts = {}
-    currFonts = []
     testFonts = set(f5Fonts)
     uniqueOriginal = set()
     uniqueNew = set()
@@ -193,12 +192,12 @@ def getFonts(files):
                         baseFonts[fontData["original"]] = baseFonts.get(fontData["original"], 0) + 1
                         uniqueOriginal.add(fontData["original"])
                     if "new" in fontData:
-                        currFonts.append(fontData["new"])
                         uniqueNew.add(fontData["new"])
                         newFonts[fontData["new"]] = newFonts.get(fontData["new"], 0) + 1
-                uniqueFontLists.add(currFonts)
                 # compare the fonts of current file, and log them
                 uniqueChanged = uniqueNew ^ uniqueOriginal
+                frozenUnique = frozenset(uniqueNew)
+                uniqueFontLists.add(frozenUnique)
                 for font in uniqueChanged:
                     results[font] = results.get(font, 0) + 1
                     results["changes"] = results.get("changes", 0) + 1 
