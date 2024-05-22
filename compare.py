@@ -194,7 +194,7 @@ def getFonts(files):
                     if "new" in fontData:
                         uniqueNew.add(fontData["new"])
                         newFonts[fontData["new"]] = newFonts.get(fontData["new"], 0) + 1
-
+                uniqueFontLists.add(uniqueNew)
                 # compare the fonts of current file, and log them
                 uniqueChanged = uniqueNew ^ uniqueOriginal
                 for font in uniqueChanged:
@@ -209,7 +209,7 @@ def getFonts(files):
             print(file)
             print(f"Error: {e}")
 
-    return results
+    return uniqueFontLists
 
 
 # gets number of changes for userAgent
