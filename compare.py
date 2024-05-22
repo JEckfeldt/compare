@@ -221,7 +221,7 @@ def getFonts(files):
 
 # gets number of changes for userAgent
 def findNumChanges():
-    files = getAllFiles(path, userAgent, True)
+    files = getAllFiles(path, userAgent, False)
     sortedFiles = sorted(files, key=extractDateTime)
     changedFiles = getChangedFiles(sortedFiles)
     print("UserAgent: ", userAgent)
