@@ -213,7 +213,7 @@ def getFonts(files):
             print(file)
             print(f"Error: {e}")
 
-    return uniqueFontLists
+    return results
 
 
 # gets number of changes for userAgent
