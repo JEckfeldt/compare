@@ -50,9 +50,9 @@ size = 18 # file size to exclude
 
 # Windows
 # Firefox
-userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__rv_125_0__Gecko_20100101_Firefox_125_0_'
+# userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__rv_125_0__Gecko_20100101_Firefox_125_0_'
 # Edge
-# userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_124_0_0_0_Safari_537_36_Edg_124_0_0_0_'
+userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_124_0_0_0_Safari_537_36_Edg_124_0_0_0_'
 # Chrome
 # userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_124_0_0_0_Safari_537_36'
 # userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_123_0_0_0_Safari_537_36'
@@ -96,7 +96,7 @@ def extractDateTime(file_name):
         return datetime.min  # Default value if date is not found 
 
 # get the first 10000 files from a list matching a userAgent (Minus the base)
-def getAllFiles(dir, userAgent):
+def getAllFiles(dir, userAgent, isChrome):
     matching = []
     limit = 1
     try:
@@ -105,9 +105,14 @@ def getAllFiles(dir, userAgent):
             for file in files:
                 filePath = os.path.join(root, file)
                 if os.path.isfile(filePath):
-                    if userAgent in file and 'base' not in file and limit <= 10000:
-                        matching.append(filePath)
-                        limit = limit + 1
+                    if isChrome:
+                        if userAgent in file and 'base' not in file and limit <= 10000 and 'Edg' not in file:
+                            matching.append(filePath)
+                            limit = limit + 1
+                    else:
+                        if userAgent in file and 'base' not in file and limit <= 10000 and 'Edg' not in file:
+                            matching.append(filePath)
+                            limit = limit + 1
     except Exception as e:
         print(f"Error: {e}")
     return matching
@@ -216,7 +221,7 @@ def getFonts(files):
 
 # gets number of changes for userAgent
 def findNumChanges():
-    files = getAllFiles(path, userAgent)
+    files = getAllFiles(path, userAgent, False)
     sortedFiles = sorted(files, key=extractDateTime)
     changedFiles = getChangedFiles(sortedFiles)
     print("UserAgent: ", userAgent)
