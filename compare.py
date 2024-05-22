@@ -197,7 +197,9 @@ def getFonts(files):
                 # compare the fonts of current file, and log them
                 uniqueChanged = uniqueNew ^ uniqueOriginal
                 frozenUnique = frozenset(uniqueNew)
+                fronzenOriginal = frozenset(uniqueOriginal)
                 uniqueFontLists.add(frozenUnique)
+                uniqueFontLists.add(fronzenOriginal)
                 for font in uniqueChanged:
                     results[font] = results.get(font, 0) + 1
                     results["changes"] = results.get("changes", 0) + 1 
