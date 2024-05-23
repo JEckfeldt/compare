@@ -52,7 +52,7 @@ size = 18 # file size to exclude
 # Firefox
 # userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__rv_125_0__Gecko_20100101_Firefox_125_0_'
 # Edge
-userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_124_0_0_0_Safari_537_36_Edg_124_0_0_0_'
+# userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_124_0_0_0_Safari_537_36_Edg_124_0_0_0_'
 # Chrome
 # userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_124_0_0_0_Safari_537_36'
 # userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_123_0_0_0_Safari_537_36'
@@ -63,7 +63,7 @@ userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML
 # Chrome
 # userAgent = 'Mozilla_5_0__Macintosh__Intel_Mac_OS_X_10_15_7__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_124_0_0_0_Safari_537_36_'
 # Firefox
-# userAgent = 'Mozilla_5_0__Macintosh__Intel_Mac_OS_X_10_15__rv_125_0__Gecko_20100101_Firefox_125_0_'
+userAgent = 'Mozilla_5_0__Macintosh__Intel_Mac_OS_X_10_15__rv_125_0__Gecko_20100101_Firefox_125_0_'
 
 # iPhone
 # Safari
@@ -171,7 +171,7 @@ def getChangedAttributes(files):
             for value in components.keys():
                 if value in changes:
                     changes[value] += 1
-                    print(value, file)
+                    # print(value, file)
                 else:
                     print(value, file)
                     changes[value] = 1
