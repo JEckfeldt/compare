@@ -171,6 +171,7 @@ def getChangedAttributes(files):
             for value in components.keys():
                 if value in changes:
                     changes[value] += 1
+                    print(value, file)
                 else:
                     print(value, file)
                     changes[value] = 1
