@@ -254,9 +254,9 @@ def getUniqueValues(files):
             components = data.get("components", {})
             print(type(components))
             for component in components.values():
-                print(type(component))
+                # print(type(component))
                 original, new = find_original_and_new(component)
-                # print(component, original, new)
+                print(component, original, new)
     return changes
 
 # gets number of changes for userAgent
