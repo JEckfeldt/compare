@@ -184,6 +184,7 @@ def getChangedAttributes(files):
         # see what attributes are changing
         if 'components' in data:
             components = data.get("components", {})
+            print(type(components))
             for value in components.keys():
                 if value in changes:
                     changes[value] += 1
