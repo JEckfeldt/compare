@@ -196,7 +196,6 @@ def getChangedAttributes(files):
         if 'components' in data:
             components = data.get("components", {})
             for value in components.keys():
-                print(findOriginalNew(value))
                 if value in changes:
                     changes[value] += 1
                     # print(value, file)
@@ -249,6 +248,24 @@ def getFonts(files):
     return uniqueFontLists
 
 
+def getUniqueValues(files):
+    changes = {}
+    
+    for file in files:
+        if not os.path.exists(file):
+            print("File not found")
+            continue
+        try:
+            with open(file, 'r') as jsonFile:
+                data = json.load(jsonFile)
+        except json.JSONDecodeError:
+            print(f"Error decoding file ${file}")
+            continue
+        for component in data["components"]:
+            original, new = findOriginalNew(component)
+            print(component, original, new)
+    return changes
+
 # gets number of changes for userAgent
 def findNumChanges():
     files = getAllFiles(path, userAgent, False)
@@ -259,6 +276,7 @@ def findNumChanges():
     print("Number of changes: ", len(changedFiles))
     print("Changes for Attributes: ", getChangedAttributes(sortedFiles))
     # print("Changes for fonts: ", len(getFonts(sortedFiles)))
+    getUniqueValues(sortedFiles)
 
 findNumChanges()
 
