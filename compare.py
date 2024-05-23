@@ -172,6 +172,7 @@ def getChangedAttributes(files):
                 if value in changes:
                     changes[value] += 1
                 else:
+                    print(value, file)
                     changes[value] = 1
     return changes
 
