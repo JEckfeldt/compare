@@ -269,7 +269,9 @@ def findNumChanges():
     print("Number of changes: ", len(changedFiles))
     print("Changes for Attributes: ", getChangedAttributes(sortedFiles))
     # print("Changes for fonts: ", len(getFonts(sortedFiles)))
-    print(getUniqueValues(sortedFiles))
+    uniques = getUniqueValues(sortedFiles)
+    for key, value in uniques.items():
+        print(key, len(value))
 
 findNumChanges()
 
