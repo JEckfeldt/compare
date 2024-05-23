@@ -50,7 +50,7 @@ size = 18 # file size to exclude
 
 # Windows
 # Firefox
-# userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__rv_125_0__Gecko_20100101_Firefox_125_0_'
+userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__rv_125_0__Gecko_20100101_Firefox_125_0_'
 # Edge
 # userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_124_0_0_0_Safari_537_36_Edg_124_0_0_0_'
 # Chrome
@@ -236,7 +236,6 @@ def getFonts(files):
     sorted_dict = dict(sorted(results.items(), key=lambda item: item[1], reverse=True))
     return uniqueFontLists
 
-
 def getUniqueValues(files):
     uniques = {}
     for file in files:
@@ -259,6 +258,27 @@ def getUniqueValues(files):
                 
     return uniques
 
+def getUniqueVisitorIds(files):
+    unqiues = set()
+    for file in files:
+        if not os.path.exists(file):
+            print("File not found")
+            continue
+        try:
+            with open(file, 'r') as jsonFile:
+                data = json.load(jsonFile)
+        except json.JSONDecodeError:
+            print(f"Error decoding file ${file}")
+            continue
+        if "visitorId" in data:
+            uniques.add(data["visitorId"]["original"])
+            uniques.add(data["visitorId"]["new"])
+
+
+                
+    return uniques
+
+
 # gets number of changes for userAgent
 def findNumChanges():
     files = getAllFiles(path, userAgent, False)
@@ -272,6 +292,7 @@ def findNumChanges():
     uniques = getUniqueValues(sortedFiles)
     for key, value in uniques.items():
         print(key, len(value))
+    print("Number unique Visitor Ids: ", len(getUniqueVisitorIds(sortedFiles)))
 
 findNumChanges()
 
