@@ -98,7 +98,6 @@ def extractDateTime(file_name):
 # Function to recursively search for "original" and "new" values
 def find_original_and_new(obj):
     if isinstance(obj, dict):
-        print("Obj is dict")
         if 'original' in obj:
             return obj['original'], obj.get('new')
         for value in obj.values():
@@ -106,7 +105,6 @@ def find_original_and_new(obj):
             if original is not None:
                 return original, new
     elif isinstance(obj, list):
-        print("obj is list")
         for item in obj:
             original, new = find_original_and_new(item)
             if original is not None:
@@ -187,7 +185,6 @@ def getChangedAttributes(files):
         if 'components' in data:
             components = data.get("components", {})
             for value in components.keys():
-                print(find_original_and_new(value))
                 if value in changes:
                     changes[value] += 1
                     # print(value, file)
@@ -255,6 +252,7 @@ def getUniqueValues(files):
             continue
         if "components" in data:
             for component in data["components"]:
+                print(type(component))
                 original, new = find_original_and_new(component)
                 print(component, original, new)
     return changes
