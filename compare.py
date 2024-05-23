@@ -185,6 +185,7 @@ def getChangedAttributes(files):
         if 'components' in data:
             components = data.get("components", {})
             for value in components.keys():
+                print(find_original_and_new(value))
                 if value in changes:
                     changes[value] += 1
                     # print(value, file)
@@ -266,7 +267,7 @@ def findNumChanges():
     print("Number of changes: ", len(changedFiles))
     print("Changes for Attributes: ", getChangedAttributes(sortedFiles))
     # print("Changes for fonts: ", len(getFonts(sortedFiles)))
-    getUniqueValues(sortedFiles)
+    # getUniqueValues(sortedFiles)
 
 findNumChanges()
 
