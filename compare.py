@@ -97,30 +97,19 @@ def extractDateTime(file_name):
 
 # Function to recursively search for "original" and "new" values
 def findOriginalNew(obj):
-    original_value = None
-    new_value = None
-
     if isinstance(obj, dict):
         if 'original' in obj:
-            original_value = obj['original']
-        if 'new' in obj:
-            new_value = obj['new']
-        for key, value in obj.items():
-            if isinstance(value, (dict, list)):
-                original, new = find_original_and_new(value)
-                if original:
-                    original_value = original
-                if new:
-                    new_value = new
+            return obj['original'], obj.get('new')
+        for value in obj.values():
+            original, new = find_original_and_new(value)
+            if original is not None:
+                return original, new
     elif isinstance(obj, list):
         for item in obj:
             original, new = find_original_and_new(item)
-            if original:
-                original_value = original
-            if new:
-                new_value = new
-
-    return original_value, new_value
+            if original is not None:
+                return original, new
+    return None, None
 
 # get the first 10000 files from a list matching a userAgent (Minus the base)
 def getAllFiles(dir, userAgent, isChrome):
