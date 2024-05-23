@@ -216,7 +216,7 @@ def getFonts(files):
             print(file)
             print(f"Error: {e}")
     sorted_dict = dict(sorted(results.items(), key=lambda item: item[1], reverse=True))
-    return sorted_dict
+    return uniqueFontLists
 
 
 # gets number of changes for userAgent
