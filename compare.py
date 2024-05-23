@@ -255,11 +255,17 @@ def getUniqueValues(files):
             for component, value in components.items():
                 original, new = find_original_and_new(value)
                 if original not in valueSeen:
-                    uniques[component].append(original)
                     valueSeen[original] = True
+                    if component in uniques:
+                        uniques[component].append(original)
+                    else:
+                        uniques[component] = original
                 if new not in valueSeen:
-                    uniques[component].append(new)
                     valueSeen[new] = True
+                    if component in uniques:
+                        uniques[component].append(new)
+                    else:
+                        uniques[component] = new
                 
     return uniques
 
