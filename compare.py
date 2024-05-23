@@ -96,7 +96,7 @@ def extractDateTime(file_name):
         return datetime.min  # Default value if date is not found 
 
 # Function to recursively search for "original" and "new" values
-def findOriginalNew(obj):
+def find_original_and_new(obj):
     if isinstance(obj, dict):
         if 'original' in obj:
             return obj['original'], obj.get('new')
@@ -252,7 +252,7 @@ def getUniqueValues(files):
             continue
         if "components" in data:
             for component in data["components"]:
-                original, new = findOriginalNew(component)
+                original, new = find_original_and_new(component)
                 print(component, original, new)
     return changes
 
@@ -266,7 +266,7 @@ def findNumChanges():
     print("Number of changes: ", len(changedFiles))
     print("Changes for Attributes: ", getChangedAttributes(sortedFiles))
     # print("Changes for fonts: ", len(getFonts(sortedFiles)))
-    # getUniqueValues(sortedFiles)
+    getUniqueValues(sortedFiles)
 
 findNumChanges()
 
