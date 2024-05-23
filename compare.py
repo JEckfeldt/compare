@@ -95,6 +95,33 @@ def extractDateTime(file_name):
     else:
         return datetime.min  # Default value if date is not found 
 
+# Function to recursively search for "original" and "new" values
+def findOriginalNew(obj):
+    original_value = None
+    new_value = None
+
+    if isinstance(obj, dict):
+        if 'original' in obj:
+            original_value = obj['original']
+        if 'new' in obj:
+            new_value = obj['new']
+        for key, value in obj.items():
+            if isinstance(value, (dict, list)):
+                original, new = find_original_and_new(value)
+                if original:
+                    original_value = original
+                if new:
+                    new_value = new
+    elif isinstance(obj, list):
+        for item in obj:
+            original, new = find_original_and_new(item)
+            if original:
+                original_value = original
+            if new:
+                new_value = new
+
+    return original_value, new_value
+
 # get the first 10000 files from a list matching a userAgent (Minus the base)
 def getAllFiles(dir, userAgent, isChrome):
     matching = []
@@ -169,6 +196,7 @@ def getChangedAttributes(files):
         if 'components' in data:
             components = data.get("components", {})
             for value in components.keys():
+                print(findOriginalNew(value))
                 if value in changes:
                     changes[value] += 1
                     # print(value, file)
