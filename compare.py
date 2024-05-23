@@ -259,7 +259,7 @@ def getUniqueValues(files):
     return uniques
 
 def getUniqueVisitorIds(files):
-    unqiues = set()
+    uniques = set()
     for file in files:
         if not os.path.exists(file):
             print("File not found")
