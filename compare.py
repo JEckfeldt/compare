@@ -251,10 +251,10 @@ def getUniqueValues(files):
             continue
         if "components" in data:
             components = data.get("components", {})
-            print(type(components))
-            for component in components.values():
+            # print(type(components))
+            for component, value in components.items():
                 print(component)
-                original, new = find_original_and_new(component)
+                original, new = find_original_and_new(value)
                 
     return uniques
 
