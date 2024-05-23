@@ -98,6 +98,7 @@ def extractDateTime(file_name):
 # Function to recursively search for "original" and "new" values
 def find_original_and_new(obj):
     if isinstance(obj, dict):
+        print("Obj is dict")
         if 'original' in obj:
             return obj['original'], obj.get('new')
         for value in obj.values():
@@ -105,6 +106,7 @@ def find_original_and_new(obj):
             if original is not None:
                 return original, new
     elif isinstance(obj, list):
+        print("obj is list")
         for item in obj:
             original, new = find_original_and_new(item)
             if original is not None:
