@@ -253,8 +253,8 @@ def getUniqueValues(files):
         if "components" in data:
             components = data.get("components", {})
             print(type(components))
-            for component in components:
-                # print(type(component))
+            for component in components.values():
+                print(type(component))
                 original, new = find_original_and_new(component)
                 # print(component, original, new)
     return changes
