@@ -239,7 +239,6 @@ def getFonts(files):
 
 def getUniqueValues(files):
     uniques = {}
-    valueSeen = {}
     for file in files:
         if not os.path.exists(file):
             print("File not found")
@@ -254,18 +253,9 @@ def getUniqueValues(files):
             components = data.get("components", {})
             for component, value in components.items():
                 original, new = find_original_and_new(value)
-                if original not in valueSeen:
-                    valueSeen[original] = True
-                    if component in uniques:
-                        uniques[component].append(original)
-                    else:
-                        uniques[component] = original
-                if new not in valueSeen:
-                    valueSeen[new] = True
-                    if component in uniques:
-                        uniques[component].append(new)
-                    else:
-                        uniques[component] = new
+                uniques.setdefault(component, set()).add(original)
+                uniques.setdefault(component, set()).add(new)
+
                 
     return uniques
 
