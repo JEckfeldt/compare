@@ -261,9 +261,10 @@ def getUniqueValues(files):
         except json.JSONDecodeError:
             print(f"Error decoding file ${file}")
             continue
-        for component in data["components"]:
-            original, new = findOriginalNew(component)
-            print(component, original, new)
+        if "components" in data:
+            for component in data["components"]:
+                original, new = findOriginalNew(component)
+                print(component, original, new)
     return changes
 
 # gets number of changes for userAgent
