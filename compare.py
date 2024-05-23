@@ -84,7 +84,7 @@ userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__rv_125_0__Gecko_20100101_
 # Chrome
 # userAgent = 'Mozilla_5_0__X11__Linux_x86_64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_124_0_0_0_Safari_537_36_'
 # Firefox
-userAgent = 'Mozilla_5_0__X11__Ubuntu__Linux_x86_64__rv_125_0__Gecko_20100101_Firefox_125_0_'
+# userAgent = 'Mozilla_5_0__X11__Ubuntu__Linux_x86_64__rv_125_0__Gecko_20100101_Firefox_125_0_'
 
 
 # Define a function to extract the date and time from the file name
