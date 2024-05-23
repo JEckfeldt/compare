@@ -238,8 +238,7 @@ def getFonts(files):
 
 
 def getUniqueValues(files):
-    changes = {}
-    
+    uniques = {}
     for file in files:
         if not os.path.exists(file):
             print("File not found")
@@ -254,10 +253,10 @@ def getUniqueValues(files):
             components = data.get("components", {})
             print(type(components))
             for component in components.values():
-                # print(type(component))
+                print(component)
                 original, new = find_original_and_new(component)
-                print(component, original, new)
-    return changes
+                
+    return uniques
 
 # gets number of changes for userAgent
 def findNumChanges():
