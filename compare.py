@@ -221,7 +221,7 @@ def getFonts(files):
                         newFonts[fontData["new"]] = newFonts.get(fontData["new"], 0) + 1
                 # compare the fonts of current file, and log them
                 uniqueChanged = uniqueNew ^ uniqueOriginal
-                if len(uniqueOriginal) > originalLen:
+                if (len(uniqueOriginal) > originalLen):
                     originalLen = uniqueOriginal
                 frozenUnique = frozenset(uniqueNew)
                 frozenOriginal = frozenset(uniqueOriginal)
