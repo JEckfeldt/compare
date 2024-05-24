@@ -52,9 +52,9 @@ size = 18 # file size to exclude
 # Firefox
 # userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__rv_125_0__Gecko_20100101_Firefox_125_0_'
 # Edge
-# userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_124_0_0_0_Safari_537_36_Edg_124_0_0_0_'
+userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_124_0_0_0_Safari_537_36_Edg_124_0_0_0_'
 # Chrome
-userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_124_0_0_0_Safari_537_36'
+# userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_124_0_0_0_Safari_537_36'
 # userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_123_0_0_0_Safari_537_36'
 
 # Macbook (Macintosh)
@@ -281,13 +281,13 @@ def getUniqueVisitorIds(files):
 
 # gets number of changes for userAgent
 def findNumChanges():
-    files = getAllFiles(path, userAgent, True)
+    files = getAllFiles(path, userAgent, False)
     sortedFiles = sorted(files, key=extractDateTime)
     changedFiles = getChangedFiles(sortedFiles)
     print("UserAgent: ", userAgent)
     print("Files sorted: ", len(sortedFiles))
-    for file in sortedFiles:
-        print(file)
+    print("First File: ", sortedFiles[0])
+    print("Last File: ", sortedFiles[-1])
     print("Number of changes: ", len(changedFiles))
     print("Changes for Attributes: ", getChangedAttributes(sortedFiles))
     # print("Changes for fonts: ", getFonts(sortedFiles))
