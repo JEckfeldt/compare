@@ -61,9 +61,10 @@ size = 18 # file size to exclude
 # Safari
 # userAgent = 'Mozilla_5_0__Macintosh__Intel_Mac_OS_X_10_15_7__AppleWebKit_605_1_15__KHTML__like_Gecko__Version_16_4_Safari_605_1_15_'
 # Chrome
+userAgent = 'Mozilla_5_0__Macintosh__Intel_Mac_OS_X_10_15_7__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_125_0_0_0_Safari_537_36_'
 # userAgent = 'Mozilla_5_0__Macintosh__Intel_Mac_OS_X_10_15_7__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_124_0_0_0_Safari_537_36_'
 # Firefox
-userAgent = 'Mozilla_5_0__Macintosh__Intel_Mac_OS_X_10_15__rv_125_0__Gecko_20100101_Firefox_125_0_'
+# userAgent = 'Mozilla_5_0__Macintosh__Intel_Mac_OS_X_10_15__rv_125_0__Gecko_20100101_Firefox_125_0_'
 
 # iPhone
 # Safari
@@ -295,9 +296,9 @@ def findNumChanges():
     print("Number of changes: ", len(changedFiles))
     print("Changes for Attributes: ", getChangedAttributes(sortedFiles))
     print("Original font list size for fonts: ", getFonts(sortedFiles))
-    # uniques = getUniqueValues(sortedFiles)
-    # for key, value in uniques.items():
-    #     print(key, len(value))
+    uniques = getUniqueValues(sortedFiles)
+    for key, value in uniques.items():
+        print(key, len(value))
     print("Number unique Visitor Ids: ", len(getUniqueVisitorIds(sortedFiles)))
 
 findNumChanges()
