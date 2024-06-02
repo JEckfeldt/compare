@@ -1332,6 +1332,14 @@ def getCanvasFontChanges(files):
 
     return changes
 
+# Takes font dictionary from canvasFontChanges and converts the keys to the corresponding font
+def getNamedFontChanges(changes):
+    results = {}
+    for font, change in changes:
+        index = int(font)
+        results[canvasFontList[index]] = change
+    return results
+
 # gets number of changes for userAgent
 def findNumChanges():
     files = getAllFiles(path, userAgent, False)
@@ -1341,9 +1349,6 @@ def findNumChanges():
     print("Files sorted: ", len(sortedFiles))
     print("Number of changes: ", len(changedFiles))
     print("Vectors changed: ", getTopics(changedFiles))
-    print("CanvasFont Changes: ", getCanvasFontChanges(sortedFiles))
+    print("CanvasFont Changes: ", getNamedFontChanges(getCanvasFontChanges(sortedFiles)))
 
 findNumChanges()
-
-
- 
