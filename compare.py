@@ -4,7 +4,7 @@ import re
 from datetime import datetime
 
 # The fonts we are collecting (Changed Files have a Zero-based index according to this list)
-let canvasFontList = [
+canvasFontList = [
     ".Aqua Kana",
     ".Helvetica LT MM",
     ".Times LT MM",
