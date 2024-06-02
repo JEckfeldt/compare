@@ -1076,6 +1076,8 @@ canvasFontList = [
     "serif"
 ]
 
+fpElements = ['fingerprintJS', 'complexCanvas', 'canvasFonts', 'screen']
+
 # UserAgents
 
 # Windows/Chrome
@@ -1146,7 +1148,6 @@ def getChangedFiles(files):
     for file in files:
         if prevFileSize is not None and os.path.getsize(file) != prevFileSize:
             # print(file)
-            # get the unstable attribute for the file and create a changes object
             changes.append(file)
         prevFileSize = os.path.getsize(file)
 
@@ -1268,6 +1269,24 @@ def getUniqueVisitorIds(files):
                 
     return uniques
 
+# Takes changed files and counts what fp vector is changing
+def getTopics(files):
+    changes = {}
+    for file in files:
+        if not os.path.exists(file):
+            print("File not found")
+            continue
+        try:
+            with open(file, 'r') as jsonFile:
+                data = json.load(jsonFile)
+        except json.JSONDecodeError:
+            print(f"Error decoding file ${file}")
+            continue
+        # see what attributes are changing
+        for element in fpElements:
+            if element in data:
+                changes[element] = changes.get(element, 0) + 1
+    return changes
 
 # gets number of changes for userAgent
 def findNumChanges():
@@ -1277,6 +1296,7 @@ def findNumChanges():
     print("UserAgent: ", userAgent)
     print("Files sorted: ", len(sortedFiles))
     print("Number of changes: ", len(changedFiles))
+    print("Vectors changed: ", getTopics(changedFiles))
 
 findNumChanges()
 
