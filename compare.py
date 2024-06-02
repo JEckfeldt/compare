@@ -1312,7 +1312,7 @@ def getCanvasFontChanges(files):
             currentIds = set(data.get("canvasFonts", {}).get("fonts", {}).keys())
             # If there is no previous file, add the set to the results
             for fontId in currentIds:
-                print(fontId)
+                print(typeof(fontId))
 
     return changes
 
