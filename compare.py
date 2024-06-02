@@ -1295,6 +1295,7 @@ def getTopics(files):
 # Takes changed files and counts what fonts are unstable
 def getCanvasFontChanges(files):
     changes = {}
+    previousIds = set()
     for file in files:
         if not os.path.exists(file):
             print("File not found")
@@ -1307,7 +1308,11 @@ def getCanvasFontChanges(files):
             continue
         # check for canvasFonts
         if 'canvasFonts' in data:
-            changes['fonts'] = changes.get('fonts', 0) + 1
+            # get the current font ids
+            currentIds = set(current_data.get("canvasFonts", {}).get("fonts", {}).keys())
+            # If there is no previous file, add the set to the results
+            for fontId in currentIds:
+                print(fontId)
 
     return changes
 
