@@ -44,48 +44,21 @@ f5Fonts = [
   'Helkevtrica',
 ]
 
-# Dir Path to search
-path = '/home/xu/f5/testsite/json'
-size = 18 # file size to exclude
+# UserAgents
 
-# Windows
-# Firefox
+# Windows/Chrome
+userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_125_0_0_0_Safari_537_36_'
+# Windows/Firefox
 # userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__rv_125_0__Gecko_20100101_Firefox_125_0_'
-# Edge
-# userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_124_0_0_0_Safari_537_36_Edg_124_0_0_0_'
-# Chrome
-# userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_124_0_0_0_Safari_537_36'
-# userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_123_0_0_0_Safari_537_36'
 
-# Macbook (Macintosh)
-# Safari
-# userAgent = 'Mozilla_5_0__Macintosh__Intel_Mac_OS_X_10_15_7__AppleWebKit_605_1_15__KHTML__like_Gecko__Version_16_4_Safari_605_1_15_'
-# Chrome
-userAgent = 'Mozilla_5_0__Macintosh__Intel_Mac_OS_X_10_15_7__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_125_0_0_0_Safari_537_36_'
-# userAgent = 'Mozilla_5_0__Macintosh__Intel_Mac_OS_X_10_15_7__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_124_0_0_0_Safari_537_36_'
-# Firefox
-# userAgent = 'Mozilla_5_0__Macintosh__Intel_Mac_OS_X_10_15__rv_125_0__Gecko_20100101_Firefox_125_0_'
+# Android/Chrome
+# userAgent = 'Mozilla_5_0__Linux__Android_10__K__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_125_0_0_0_Mobile_Safari_537_36_'
 
-# iPhone
-# Safari
-# userAgent = 'Mozilla_5_0__iPhone__CPU_iPhone_OS_17_4_1_like_Mac_OS_X__AppleWebKit_605_1_15__KHTML__like_Gecko__Version_17_4_1_Mobile_15E148_Safari_604_1_'
-# Chrome
-# userAgent = 'Mozilla_5_0__iPhone__CPU_iPhone_OS_17_4_like_Mac_OS_X__AppleWebKit_605_1_15__KHTML__like_Gecko__CriOS_124_0_6367_71_Mobile_15E148_Safari_604_1_'
-# userAgent = 'Mozilla_5_0__iPhone__CPU_iPhone_OS_17_4_like_Mac_OS_X__AppleWebKit_605_1_15__KHTML__like_Gecko__CriOS_124_0_6367_88_Mobile_15E148_Safari_604_1_'
-# Firefox
-# userAgent = 'Mozilla_5_0__iPhone__CPU_iPhone_OS_17_4_1_like_Mac_OS_X__AppleWebKit_605_1_15__KHTML__like_Gecko__FxiOS_125_2__Mobile_15E148_Safari_605_1_15_'
+# Dir Path to search
+path = '/home/xu/f5/fpCollector/json'
 
-# Android
-# Firefox
-# userAgent = 'Mozilla_5_0__Android_12__Mobile__rv_82_0__Gecko_82_0_Firefox_82_0_'
-# Chrome
-# userAgent = 'Mozilla_5_0__Linux__Android_12__Pixel_3a__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_95_0_4638_74_Mobile_Safari_537_36_'
-
-# Linux
-# Chrome
-# userAgent = 'Mozilla_5_0__X11__Linux_x86_64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_124_0_0_0_Safari_537_36_'
-# Firefox
-# userAgent = 'Mozilla_5_0__X11__Ubuntu__Linux_x86_64__rv_125_0__Gecko_20100101_Firefox_125_0_'
+# File Limit
+fileLimit = 6000
 
 
 # Define a function to extract the date and time from the file name
@@ -123,36 +96,16 @@ def getAllFiles(dir, userAgent, isChrome):
                 filePath = os.path.join(root, file)
                 if os.path.isfile(filePath):
                     if isChrome:
-                        if userAgent in file and 'base' not in file and limit <= 10000 and 'Edg' not in file:
+                        if userAgent in file and 'base' not in file and limit <= fileLimit and 'Edg' not in file:
                             matching.append(filePath)
                             limit = limit + 1
                     else:
-                        if userAgent in file and 'base' not in file and limit <= 10000:
+                        if userAgent in file and 'base' not in file and limit <= fileLimit:
                             matching.append(filePath)
                             limit = limit + 1
     except Exception as e:
         print(f"Error: {e}")
     return matching
-
-# Return list of files not matching certain size
-def getUnstableFiles(dir, excludeSize, userAgent):
-    matchingFiles = []
-    i = 1
-    try:
-        # Walk through the directory
-        for root, dirs, files in os.walk(dir):
-            for file in files:
-                filePath = os.path.join(root, file)
-                # if file is valid, is not the normal size, and the userAgent is in filename
-                if os.path.isfile(filePath):
-                    if os.path.getsize(filePath) != excludeSize and (userAgent in file) and 'base' not in file and i <= 10000:
-                        if file not in matchingFiles:
-                            matchingFiles.append(filePath)
-                            i = i + 1   
-
-    except Exception as e:
-        print(f"Error: {e}")
-    return matchingFiles
 
 # count how many times the file size changed
 def getChangedFiles(files):
@@ -291,16 +244,9 @@ def findNumChanges():
     changedFiles = getChangedFiles(sortedFiles)
     print("UserAgent: ", userAgent)
     print("Files sorted: ", len(sortedFiles))
-    # print("First File: ", sortedFiles[0])
-    # print("Last File: ", sortedFiles[-1])
     print("Number of changes: ", len(changedFiles))
-    print("Changes for Attributes: ", getChangedAttributes(sortedFiles))
-    print("Original font list size for fonts: ", getFonts(sortedFiles))
-    uniques = getUniqueValues(sortedFiles)
-    for key, value in uniques.items():
-        print(key, len(value))
-    print("Number unique Visitor Ids: ", len(getUniqueVisitorIds(sortedFiles)))
 
 findNumChanges()
 
 
+ 
