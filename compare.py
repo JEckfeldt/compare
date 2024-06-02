@@ -1285,7 +1285,11 @@ def getTopics(files):
         # see what attributes are changing
         for element in fpElements:
             if element in data:
-                changes[element] = changes.get(element, 0) + 1
+                if element in changes:
+                    changes[element] += 1
+                else:
+                    changes[element] = 1
+                    print(element, file)        
     return changes
 
 # gets number of changes for userAgent
