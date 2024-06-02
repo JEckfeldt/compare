@@ -1297,6 +1297,7 @@ def getCanvasFontChanges(files):
     changes = {}
     previousIds = set()
     changedIds = set()
+    currentIds = set()
     for file in files:
         if not os.path.exists(file):
             print("File not found")
