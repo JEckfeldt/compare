@@ -1309,7 +1309,7 @@ def getCanvasFontChanges(files):
         # check for canvasFonts
         if 'canvasFonts' in data:
             # get the current font ids
-            currentIds = set(current_data.get("canvasFonts", {}).get("fonts", {}).keys())
+            currentIds = set(data.get("canvasFonts", {}).get("fonts", {}).keys())
             # If there is no previous file, add the set to the results
             for fontId in currentIds:
                 print(fontId)
