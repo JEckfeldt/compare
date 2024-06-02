@@ -1292,10 +1292,11 @@ def getTopics(files):
                     print(element, file)
     return changes
 
-# Takes changed files and counts what fonts are unstable
+# Takes all files and counts what fonts are changing
 def getCanvasFontChanges(files):
     changes = {}
     previousIds = set()
+    changedIds = set()
     for file in files:
         if not os.path.exists(file):
             print("File not found")
@@ -1306,13 +1307,28 @@ def getCanvasFontChanges(files):
         except json.JSONDecodeError:
             print(f"Error decoding file ${file}")
             continue
-        # check for canvasFonts
+        # check for canvasFonts in current file
         if 'canvasFonts' in data:
             # get the current font ids
             currentIds = set(data.get("canvasFonts", {}).get("fonts", {}).keys())
             # If there is no previous file, add the set to the results
-            for fontId in currentIds:
-                print(type(fontId))
+            if not previousIds:                
+                for fontId in currentIds:
+                    changes[fontId] = changes.get(fontId, 0) + 1
+            # get the ids that are not in previous or current
+            else:
+                changedIds = previousIds ^ currentIds
+                # add them to the changes
+                for fontId in changedIds:
+                    changes[fontId] = changes.get(fontId, 0) + 1
+        # The current file doesnt have canvasFonts
+        else:
+            # add all previousIds to changes
+            for fontId in previousIds:
+                changes[fontId] = changes.get(fontId, 0) + 1
+        previousIds = currentIds
+        changedIds.clear()
+        currentIds.clear()
 
     return changes
 
@@ -1325,7 +1341,7 @@ def findNumChanges():
     print("Files sorted: ", len(sortedFiles))
     print("Number of changes: ", len(changedFiles))
     print("Vectors changed: ", getTopics(changedFiles))
-    print("CanvasFont Changes: ", getCanvasFontChanges(changedFiles))
+    print("CanvasFont Changes: ", getCanvasFontChanges(sortedFiles))
 
 findNumChanges()
 
