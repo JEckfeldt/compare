@@ -1289,7 +1289,26 @@ def getTopics(files):
                     changes[element] += 1
                 else:
                     changes[element] = 1
-                    print(element, file)        
+                    print(element, file)
+    return changes
+
+# Takes changed files and counts what fonts are unstable
+def getCanvasFontChanges(files):
+    changes = {}
+    for file in files:
+        if not os.path.exists(file):
+            print("File not found")
+            continue
+        try:
+            with open(file, 'r') as jsonFile:
+                data = json.load(jsonFile)
+        except json.JSONDecodeError:
+            print(f"Error decoding file ${file}")
+            continue
+        # check for canvasFonts
+        if 'canvasFonts' in data:
+            changes['fonts'] = changes.get('fonts', 0) + 1
+
     return changes
 
 # gets number of changes for userAgent
@@ -1301,6 +1320,7 @@ def findNumChanges():
     print("Files sorted: ", len(sortedFiles))
     print("Number of changes: ", len(changedFiles))
     print("Vectors changed: ", getTopics(changedFiles))
+    print("CanvasFont Changes: ", getCanvasFontChanges(changedFiles))
 
 findNumChanges()
 
