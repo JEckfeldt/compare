@@ -1338,7 +1338,7 @@ def getNamedFontChanges(changes):
 
 # gets number of changes for userAgent
 def findNumChanges():
-    files = getAllFiles(path, userAgent, False)
+    files = getAllFiles(path, userAgent, True)
     sortedFiles = sorted(files, key=extractDateTime)
     changedFiles = getChangedFiles(sortedFiles)
     print("UserAgent: ", userAgent)
