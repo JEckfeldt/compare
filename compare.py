@@ -1331,8 +1331,6 @@ def getFingerprintChanges(files):
             fingerprint_data = data.get('fingerprintJS', {})
             components = fingerprint_data.get('components', {})
             for value in components.keys():
-                if 'webGl' in value:
-                    print(file)
                 if value in changes:
                     changes[value] += 1
                     # print(value, file)
