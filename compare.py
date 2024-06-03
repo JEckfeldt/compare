@@ -1316,6 +1316,8 @@ def getNamedFontChanges(changes):
 # Takes files and gets the components of fingerprintJS that are changing
 def getFingerprintChanges(files):
     changes = {}
+    tally = 0
+    prev = False
     for file in files:
         if not os.path.exists(file):
             print("File not found")
@@ -1327,6 +1329,9 @@ def getFingerprintChanges(files):
             print(f"Error decoding file ${file}")
             continue
         if 'fingerprintJS' in data:
+            if not prev:
+                tally += 1
+                prev = True
             # iterate through components and get attributes
             fingerprint_data = data.get('fingerprintJS', {})
             components = fingerprint_data.get('components', {})
@@ -1337,6 +1342,9 @@ def getFingerprintChanges(files):
                 else:
                     # print(value, file)
                     changes[value] = 1
+        else:
+            prev = False
+    print("Number of changes in FingerprintJS: ", tally)
     return changes
 
 # Get the canvas changes in files
