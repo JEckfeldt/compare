@@ -1332,6 +1332,7 @@ def getFingerprintChanges(files):
             if not prev:
                 tally += 1
                 prev = True
+                print(file)
             # iterate through components and get attributes
             fingerprint_data = data.get('fingerprintJS', {})
             components = fingerprint_data.get('components', {})
