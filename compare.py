@@ -1157,33 +1157,6 @@ def getChangedFiles(files):
 
     return changes  
 
-# count what attributes are changed when the file size changes
-def getChangedAttributes(files):
-    changes = {}
-    prevFileSize = None
-    
-    for file in files:
-        if not os.path.exists(file):
-            print("File not found")
-            continue
-        try:
-            with open(file, 'r') as jsonFile:
-                data = json.load(jsonFile)
-        except json.JSONDecodeError:
-            print(f"Error decoding file ${file}")
-            continue
-        # see what attributes are changing
-        if 'components' in data:
-            components = data.get("components", {})
-            for value in components.keys():
-                if value in changes:
-                    changes[value] += 1
-                    # print(value, file)
-                else:
-                    print(value, file)
-                    changes[value] = 1
-    return changes
-
 # get the fonts that are changing in the files
 def getFonts(files):
     originalLen = 0
@@ -1353,10 +1326,17 @@ def getFingerprintChanges(files):
         except json.JSONDecodeError:
             print(f"Error decoding file ${file}")
             continue
-        # check for canvasFonts in current file
         if 'fingerprintJS' in data:
-            changes['numchanges'] = changes.get('numchanges', 0) + 1
-            print(file)
+            # iterate through components and get attributes
+            if 'components' in data:
+                components = data.get("components", {})
+                for value in components.keys():
+                    if value in changes:
+                        changes[value] += 1
+                        # print(value, file)
+                    else:
+                        print(value, file)
+                        changes[value] = 1
     return changes
 
 # gets number of changes for userAgent
