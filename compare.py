@@ -1331,6 +1331,8 @@ def getFingerprintChanges(files):
             fingerprint_data = data.get('fingerprintJS', {})
             components = fingerprint_data.get('components', {})
             for value in components.keys():
+                if 'webGl' in value:
+                    print(file)
                 if value in changes:
                     changes[value] += 1
                     # print(value, file)
@@ -1364,7 +1366,7 @@ def findNumChanges():
     print("UserAgent: ", userAgent)
     print("Files sorted: ", len(sortedFiles))
     print("Number of changes: ", len(changedFiles))
-    print("Vectors changed: ", getTopics(changedFiles))
+    print("Vectors changed: ", getTopics(changedFiles)) 
     fontChanges = getCanvasFontChanges(sortedFiles)
     print("Fonts changed: ", getNamedFontChanges(fontChanges))
     print("FingerprintJS Changes: ", getFingerprintChanges(sortedFiles))
