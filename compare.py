@@ -1339,6 +1339,23 @@ def getFingerprintChanges(files):
                     changes[value] = 1
     return changes
 
+# Get the canvas changes in files
+def getCanvasChanges(files):
+    changes = {}
+    for file in files:
+        if not os.path.exists(file):
+            print("File not found")
+            continue
+        try:
+            with open(file, 'r') as jsonFile:
+                data = json.load(jsonFile)
+        except json.JSONDecodeError:
+            print(f"Error decoding file ${file}")
+            continue
+        if 'complexCanvas' in data:
+            print(file)
+    return changes
+
 # gets number of changes for userAgent
 def findNumChanges():
     files = getAllFiles(path, userAgent, False)
@@ -1351,4 +1368,5 @@ def findNumChanges():
     fontChanges = getCanvasFontChanges(sortedFiles)
     print("Fonts changed: ", getNamedFontChanges(fontChanges))
     print("FingerprintJS Changes: ", getFingerprintChanges(sortedFiles))
+    print("Complex Canvas Changes: ", getCanvasChanges(sortedFiles))
 findNumChanges()
