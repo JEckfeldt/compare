@@ -1337,7 +1337,7 @@ def getFingerprintChanges(files):
                     changes[value] += 1
                     # print(value, file)
                 else:
-                    print(value, file)
+                    # print(value, file)
                     changes[value] = 1
     return changes
 
