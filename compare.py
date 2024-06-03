@@ -1262,6 +1262,8 @@ def getTopics(files):
         # see what attributes are changing
         for element in fpElements:
             if element in data:
+                if 'fingerprint' in element:
+                    print("FpJS: ", file)
                 if element in changes:
                     changes[element] += 1
                 else:
