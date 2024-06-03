@@ -1328,15 +1328,15 @@ def getFingerprintChanges(files):
             continue
         if 'fingerprintJS' in data:
             # iterate through components and get attributes
-            if 'components' in data:
-                components = data.get("components", {})
-                for value in components.keys():
-                    if value in changes:
-                        changes[value] += 1
-                        # print(value, file)
-                    else:
-                        print(value, file)
-                        changes[value] = 1
+            fingerprint_data = data.get('fingerprintJS', {})
+            components = fingerprint_data.get('components', {})
+            for value in components.keys():
+                if value in changes:
+                    changes[value] += 1
+                    # print(value, file)
+                else:
+                    print(value, file)
+                    changes[value] = 1
     return changes
 
 # gets number of changes for userAgent
