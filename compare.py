@@ -1084,10 +1084,10 @@ fpElements = ['fingerprintJS', 'complexCanvas', 'canvasFonts', 'screen']
 # userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_125_0_0_0_Safari_537_36_'
 
 # Windows/Firefox
-# userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__rv_125_0__Gecko_20100101_Firefox_125_0_'
+userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__rv_125_0__Gecko_20100101_Firefox_125_0_'
 
 # Windows/Edge
-userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_125_0_0_0_Safari_537_36_Edg_125_0_0_0_'
+# userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_125_0_0_0_Safari_537_36_Edg_125_0_0_0_'
 
 # Android/Chrome
 # userAgent = 'Mozilla_5_0__Linux__Android_10__K__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_125_0_0_0_Mobile_Safari_537_36_'
