@@ -1092,7 +1092,7 @@ userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML
 path = '/home/xu/f5/fpCollector/json'
 
 # File Limit
-fileLimit = 6000
+fileLimit = 10000
 
 
 # Define a function to extract the date and time from the file name
