@@ -1340,6 +1340,24 @@ def getNamedFontChanges(changes):
         results[canvasFontList[index]] = changes[font]
     return results
 
+# Takes files and gets the components of fingerprintJS that are changing
+def getFingerprintChanges(files):
+    changes = {}
+    for file in files:
+        if not os.path.exists(file):
+            print("File not found")
+            continue
+        try:
+            with open(file, 'r') as jsonFile:
+                data = json.load(jsonFile)
+        except json.JSONDecodeError:
+            print(f"Error decoding file ${file}")
+            continue
+        # check for canvasFonts in current file
+        if 'fingerprintJS' in data:
+            print("foundChange")
+    return changes
+
 # gets number of changes for userAgent
 def findNumChanges():
     files = getAllFiles(path, userAgent, False)
