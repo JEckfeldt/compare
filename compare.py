@@ -1355,7 +1355,7 @@ def getFingerprintChanges(files):
             continue
         # check for canvasFonts in current file
         if 'fingerprintJS' in data:
-            print("foundChange")
+            changes['numchanges'] = changes.get('numchanges', 0) + 1
     return changes
 
 # gets number of changes for userAgent
