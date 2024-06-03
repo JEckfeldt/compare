@@ -1368,7 +1368,6 @@ def findNumChanges():
     print("Number of changes: ", len(changedFiles))
     print("Vectors changed: ", getTopics(changedFiles))
     fontChanges = getCanvasFontChanges(sortedFiles)
-    print("CanvasFont Changes: ", fontChanges)
     print("Fonts changed: ", getNamedFontChanges(fontChanges))
-
+    print("FingerprintJS Changes: ", getFingerprintChanges(sortedFiles))
 findNumChanges()
