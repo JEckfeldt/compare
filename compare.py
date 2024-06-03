@@ -1355,7 +1355,7 @@ def getCanvasChanges(files):
             print(f"Error decoding file ${file}")
             continue
         if 'complexCanvas' in data:
-            # print(file)
+            print(file)
     return changes
 
 # gets number of changes for userAgent
