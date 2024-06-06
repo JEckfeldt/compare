@@ -1081,16 +1081,19 @@ fpElements = ['fingerprintJS', 'complexCanvas', 'canvasFonts', 'screen']
 # UserAgents
 
 # Windows/Chrome
-# userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_125_0_0_0_Safari_537_36_'
-
+userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_125_0_0_0_Safari_537_36_'
 # Windows/Firefox
 # userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__rv_125_0__Gecko_20100101_Firefox_125_0_'
-
 # Windows/Edge
 # userAgent = 'Mozilla_5_0__Windows_NT_10_0__Win64__x64__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_125_0_0_0_Safari_537_36_Edg_125_0_0_0_'
-
+# Mac/Safari
+# userAgent = 'Mozilla_5_0__Macintosh__Intel_Mac_OS_X_10_15_7__AppleWebKit_605_1_15__KHTML__like_Gecko__Version_17_5_Safari_605_1_15_'
+# Mac/Chrome
+# userAgent = 'Mozilla_5_0__Macintosh__Intel_Mac_OS_X_10_15_7__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_125_0_0_0_Safari_537_36_'
+# Mac/Firefox
+# userAgent = 'Mozilla_5_0__Macintosh__Intel_Mac_OS_X_10_15__rv_126_0__Gecko_20100101_Firefox_126_0_'
 # Android/Chrome
-userAgent = 'Mozilla_5_0__Linux__Android_10__K__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_125_0_0_0_Mobile_Safari_537_36_'
+# userAgent = 'Mozilla_5_0__Linux__Android_10__K__AppleWebKit_537_36__KHTML__like_Gecko__Chrome_125_0_0_0_Mobile_Safari_537_36_'
 
 # Dir Path to search
 path = '/home/xu/f5/fpCollector/json'
@@ -1374,8 +1377,8 @@ def findNumChanges():
     print("Files sorted: ", len(sortedFiles))
     print("Number of changes: ", len(changedFiles))
     print("Vectors changed: ", getTopics(sortedFiles)) 
-    fontChanges = getCanvasFontChanges(sortedFiles)
-    print("Fonts changed: ", getNamedFontChanges(fontChanges))
-    print("FingerprintJS Changes: ", getFingerprintChanges(sortedFiles))
-    print("Complex Canvas Changes: ", getCanvasChanges(sortedFiles))
+    # fontChanges = getCanvasFontChanges(sortedFiles)
+    # print("Fonts changed: ", getNamedFontChanges(fontChanges))
+    # print("FingerprintJS Changes: ", getFingerprintChanges(sortedFiles))
+    # print("Complex Canvas Changes: ", getCanvasChanges(sortedFiles))
 findNumChanges()

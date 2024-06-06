@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body onload="pageLoad()">
+    <script>
+const crypto = require('crypto');
+
+// Define the string to be hashed
+const myString = 'Hello, world!';
+
+// Create a SHA-256 hash object
+const hash = crypto.createHash('sha256');
+
+// Update the hash object with the string
+hash.update(myString);
+
+// Generate the hashed string in hexadecimal format
+const hashedString = hash.digest('hex');
+
+console.log(hashedString); // Output the hashed string
+
+function pageLoad() {
+    c = complexCanvas()
+    console.log(c)
+
+    a = canvas1()
+    console.log(a)
+
+    canvas2()
+    console.log(complexCanvas2())
+}
+
+function canvas1() {
+    let canvasTestText = 'Hel$&?6%){mZ+#@',
+    hashcode = null,
+    dataString = null,
+    dataFragment = null;
+
+    let startTime = Date.now();
+    let canvas = document.createElement('canvas');
+    let context = canvas.getContext('2d');
+    if (context) {
+      context.font = '18pt Sans';
+      context.textBaseline = 'top';
+      context.fillText(canvasTestText, 2, 2);
+    }
+
+    dataString = canvas.toDataURL('image/png');
+
+    return dataString
+}
+
+function complexCanvas2() {
+    var canvas = document.createElement('canvas');
+    var ctx = canvas.getContext('2d');
+    canvas.height = 200;
+    canvas.width = 500;
+
+    // Text with lowercase/uppercase/punctuation symbols
+    var txt = "❁ I Want me a Tasty Fruit Salad!\n\r <🍏🍎🍐🍊🍋🍌🍉🍇🍓🍈🍒🍑🍍🥝>";
+    ctx.textBaseline = "top";
+    // The most common type
+    ctx.font = "14px 'Arial'";
+    ctx.textBaseline = "alphabetic";
+    ctx.fillStyle = "#f60";
+    ctx.fillRect(125,1,62,20);
+    // Some tricks for color mixing to increase the difference in rendering
+    ctx.fillStyle = "#069";
+    ctx.fillText(txt, 2, 15);
+    ctx.fillStyle = "rgba(102, 204, 0, 0.7)";
+    ctx.fillText(txt, 4, 17);
+
+    // canvas blending
+    // http://blogs.adobe.com/webplatform/2013/01/28/blending-features-in-canvas/
+    // http://jsfiddle.net/NDYV8/16/
+    ctx.globalCompositeOperation = "multiply";
+    ctx.fillStyle = "rgb(255,0,255)";
+    ctx.beginPath();
+    ctx.arc(50, 50, 50, 0, Math.PI * 2, true);
+    ctx.closePath();
+    ctx.fill();
+    ctx.fillStyle = "rgb(0,255,255)";
+    ctx.beginPath();
+    ctx.arc(100, 50, 50, 0, Math.PI * 2, true);
+    ctx.closePath();
+    ctx.fill();
+    ctx.fillStyle = "rgb(255,255,0)";
+    ctx.beginPath();
+    ctx.arc(75, 100, 50, 0, Math.PI * 2, true);
+    ctx.closePath();
+    ctx.fill();
+    ctx.fillStyle = "rgb(255,0,255)";
+    // canvas winding
+    // http://blogs.adobe.com/webplatform/2013/01/30/winding-rules-in-canvas/
+    // http://jsfiddle.net/NDYV8/19/
+    ctx.arc(75, 75, 75, 0, Math.PI * 2, true);
+    ctx.arc(75, 75, 25, 0, Math.PI * 2, true);
+    ctx.fill("evenodd");
+
+    dataString = canvas.toDataURL('image/png');
+
+    return dataString
+}
+
+function canvas2() {
+    let canvas = document.createElement('canvas');
+    canvas.width = 400;
+    canvas.height = 100;
+    let ctx = canvas.getContext('2d');
+    if (ctx) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      canvas.style.display = 'inline';
+      ctx.textBaseline = 'alphabetic';
+      ctx.fillStyle = '#069';
+      ctx.font = '11pt no-real-font-123';
+      ctx.fillText('Hel$&?6%){mZ+#@, \ud83d\ude03', canvas.width / 2, canvas.height / 4);
+      dataString1 = canvas.toDataURL('image/png');
+      console.log(dataString1)
+
+    
+      let g10 = ctx.createRadialGradient(
+        canvas.width / 2,
+        canvas.height / 2,
+        0,
+        canvas.width / 2,
+        canvas.height / 2,
+        canvas.width / 2,
+      );
+      g10.addColorStop(0, 'red');
+      g10.addColorStop(0.5, 'green');
+      g10.addColorStop(1.0, 'blue');
+      ctx.fillStyle = g10;
+      ctx.font = '15pt no-real-font-123';
+      ctx.shadowBlur = 5;
+      ctx.shadowColor = 'black';
+      ctx.fillText('Cwm fjordbank glyphs vext quiz, \ud83d\ude03', 15, 50);
+      dataString2 = canvas.toDataURL('image/png');
+      console.log(dataString2)
+      
+
+      ctx.beginPath();
+      ctx.moveTo(80, 80);
+      ctx.bezierCurveTo(-20, -20, 50, 25, 380, 85);
+      ctx.lineWidth = 3;
+      ctx.strokeStyle = 'black';
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(50, 20);
+      ctx.quadraticCurveTo(20, 100, 300, 20);
+      ctx.stroke();
+      dataString3 = canvas.toDataURL('image/png');
+      console.log(dataString3)
+    }
+}
+
+function complexCanvas() {
+    let canvas = document.createElement('canvas');
+    canvas.width = 122;
+    canvas.height = 110;
+    let context = canvas.getContext('2d');
+    if (context) {
+        context.globalCompositeOperation = 'multiply';
+        let _i, _b, _a, color, x, y;
+        for (_i = 0, _a = [
+            ['#f2f', 40, 40],
+            ['#2ff', 80, 40],
+            ['#ff2', 60, 80],
+        ]; _i < _a.length; _i++) {
+            _b = _a[_i];
+            color = _b[0];
+            x = _b[1];
+            y = _b[2];
+            context.fillStyle = color;
+            context.beginPath();
+            context.arc(x, y, 40, 0, Math.PI * 2, true);
+            context.closePath();
+            context.fill();
+        }
+        // Canvas winding
+        // https://web.archive.org/web/20130913061632/http://blogs.adobe.com/webplatform/2013/01/30/winding-rules-in-canvas/
+        // http://jsfiddle.net/NDYV8/19/
+        context.fillStyle = '#f9c';
+        context.arc(60, 60, 60, 0, Math.PI * 2, true);
+        context.arc(60, 60, 20, 0, Math.PI * 2, true);
+        context.fill('evenodd');
+        dataString = canvas.toDataURL('image/png');
+        return dataString
+    }
+    else {
+        return null
+    }
+}
+    </script>
+</body>
+</html>
